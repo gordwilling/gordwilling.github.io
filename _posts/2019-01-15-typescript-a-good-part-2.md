@@ -2,8 +2,6 @@
 layout: post
 title:  "TypeScript: A Good Part - Part 2 of 4"
 ---
-# TypeScript: A Good Part - Part 2 of 4
-
 ## Recap
 
 Recall in [part 1][part1] we developed an API for searching and sorting HTML tables. While satisfied with our work, opportunities for code reuse had presented themselves. 

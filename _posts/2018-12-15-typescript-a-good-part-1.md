@@ -2,8 +2,6 @@
 layout: post
 title:  "TypeScript: A Good Part - Part 1 of 4"
 ---
-# TypeScript: A Good Part
-
 ## Introduction
 
 TypeScript has emerged as a leading alternative to JavaScript in large projects where compiler-enforced type-constraints[^1] free developers from runtime uncertainty.

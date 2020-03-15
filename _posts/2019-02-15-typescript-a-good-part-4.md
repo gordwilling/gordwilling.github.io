@@ -2,8 +2,6 @@
 layout: post
 title:  "TypeScript: A Good Part - Part 4 of 4"
 ---
-# TypeScript: A Good Part - Conclusion
-
 ## Recap
 
 In [part 1][part1] of this series we developed an API for searching and sorting HTML tables. We introduced some code reuse in [part 2][part2] but were dissatisfied with the boilerplate. [Part 3][part3] teased us with `keyof`, a promising feature of the type system. In this final post we dig in and finally deliver the goods.

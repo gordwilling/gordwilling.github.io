@@ -2,8 +2,6 @@
 layout: post
 title:  "Optional - The Missing Manual - Part 1"
 ---
-# Optional - The Missing Manual
-
 March 18, 2020 marks the 6th anniversary of Java 8. A highlight of the release was the introduction Functional Programming concepts, like Lazy `Streams` and an `Optional` data type. Java's roadmap sees the functional trend continuing, so much that in three years, the way java is written will be fundamentally different. And better.
 
 Unfortunately, my experience over the past several years has indicated that few developers - spanning from novice to expert - are learning how to use these new features. In particular, `Optional` is not just a null-safe data object. It is Java opening the door to a fundamentally different way of computing. It is the first step in a long journey that the Java design team has embarked on, in its commitment to remain relevant.
