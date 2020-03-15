@@ -51,7 +51,7 @@ public String getFullName(PopStar popStar) {
 
 Here the user was informed by the API that the value may be absent and knows to handle that situation. However, the code is still contaminated with the more verbose `Optional<String>` declaration, along with calls to `isPresent` and `get` . The intent of `getFullName` is to construct the full name of the pop star. The extra syntax adds noise. From the caller perspective, the `Optional` type, while informative, is no better than handling `null`, or perhaps even worse because of the additional noise. Why bother with this thing?
 
-## Prefer `map` over `isPresent` and `get`
+## Prefer Map over IsPresent and Get
 
 The creators of `Optional` feel our pain. `Optional` contains a `map` method which allows a function to be applied to the value inside *if it exists*. It frees the user from checking for the value, allowing focus to remain on what needs to be done with the value when it is there. The so-called *happy path*.
 
@@ -70,7 +70,7 @@ public String getFullName(PopStar popStar) {
 
 Well that *is* a lot shorter but it is **terrible**! This is a simple function but it looks pretty confusing for a reader. Our goal is to remove complexity, not obfuscate further! 
 
-## `map` Is Not Enough
+## Map Is Not Enough
 Just using `map` with a lambda can create serious noise and confusion, even with the simple example shown above. Replacing the lambda with a well-named helper function goes a long way to clarifying the intent.
 
 Here is the code with the second lambda refactored into a named function 
