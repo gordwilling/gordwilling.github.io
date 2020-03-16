@@ -142,6 +142,8 @@ It should be noted that our team *has* struggled with quirks arising from JavaSc
 
 My teammate Patrick and I never set out to solve this problem together. We were independently driven to rid the code of some repetitive boilerplate. Along the way, we discussed some ideas and agreed that, while our respective ideas had merit, none were satisfying. We kept up our other work, but poked at this problem along the way. And we came up with something better than either of us could have done alone. We both discovered something new, and I had a $5 beer. For me, this kind of experience brings the most joy, and I am grateful to Patrick for having the enthusiasm and desire to challenge my work, to make our software better, together. 
 
+---
+
 [^1]: https://www.youtube.com/watch?v=UPBd8eHQqIw
 [^2]: With a strict compiler configuration enabled.
 [^3]: When *exactly* the nightmare begins is up for debate. But it *will* happen.

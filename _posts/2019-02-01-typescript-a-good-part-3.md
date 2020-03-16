@@ -147,6 +147,7 @@ class TableSort<T> {
 
 Surely that's too much to ask of the type system. On the other hand, the utility of `keyof` seems starkly limited if these additional constraints can't be applied. What does TypeScript have to say about all this? Find out in the [final post][part4] of this series.
 
+---
 [^1]: ```keyof``` is *not* the capital of Ukraine.
 
 [cc-text-predicate-all-field-names]: assets/text-predicate-all-field-names.png

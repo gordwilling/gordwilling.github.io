@@ -156,7 +156,7 @@ Patrick and I went away scratching our heads. Patrick thought some more and did 
 
 In [part 3][part3], Patrick breaks the stalemate with a wonderful discovery...
 
-
+---
 [^1]: Type aliasing is real a treat for proponents of self-documenting code.
 
 [^2]: The language documentation mentions some subtle differences but they are not important to this discussion. 

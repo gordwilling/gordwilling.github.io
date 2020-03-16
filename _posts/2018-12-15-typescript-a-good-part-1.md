@@ -209,6 +209,8 @@ But ours is a large application with over 50 of these tables. Many of them, whil
 
 In [part 2][part2], we'll examine some strategies for code-reuse that get us further, and present a new challenge that Patrick and I react to in vastly different ways...
 
+---
+
 [^1]: Assuming the preferred strict configuration in `tsconfig.json`  
 
 [^2]: It's not quite this simple: Some field values are localized for display, thus must be localized during search and sort. Searching on date values depends on the applied date format. While those cases are handled, they are beyond the focus of this article.  
