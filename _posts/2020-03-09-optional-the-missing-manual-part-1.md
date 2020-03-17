@@ -2,7 +2,7 @@
 layout: post
 title:  "Optional - The Missing Manual - Part 1"
 ---
-March 18, 2020 marks the 6th anniversary of Java 8. A highlight of the release was the introduction Functional Programming concepts, like Lazy `Streams` and an `Optional` data type. Java's roadmap sees the functional trend continuing, so much that in three years, the way java is written will be fundamentally different. And better.
+March 18, 2020 marks the 6th anniversary of Java 8. A highlight of the release was the introduction Functional Programming concepts, like Lazy `Streams` and an `Optional` data type. Java's roadmap sees the functional trend continuing, so much that in three years, the way Java is written will be fundamentally different. And better.
 
 Unfortunately, my experience over the past several years has indicated that few Java developers - spanning from novice to expert - understand the full implications of this data structure. In particular, `Optional` is not just a null-safe data type. It is Java opening the door to a fundamentally different way of computing. It is the first step in a long journey that the Java design team has embarked on, in its commitment to remain relevant.
 
@@ -96,6 +96,8 @@ Kind of better, but not really. The main advantage is we have divided `getFullNa
 
 ## Strive for Concision and Clarity
 
+If we play around with the function signature of `joinWithLastNameOf` we can remove a little bit of noise. We know the `map` method supplies a `firstName` parameter. We can make that *implicit* if we have `joinWithLastNameOf` return a function that accepts the `firstName` string.
+
 ```java
 public String getFullName(PopStar popStar) {
     return popStar.getFirstName()
@@ -110,10 +112,10 @@ private Function<String, String> joinWithLastNameOf(PopStar popStar) {
 }
 ```
 
-Here the top level function is very readable, to the point where we can skip reading the helper function because we already understand the intent. The only time we would need to read the helper function is to troubleshoot an error. Oftentimes, however, these helper functions are so simple, errors are unlikely.
+Here the top level function is very readable, to the point where we can skip reading the helper function because the intent is clear. The only time we would need to read the helper function is to troubleshoot an error. Oftentimes, however, these helper functions are so simple, errors are unlikely.
 
 ## Partial Function Application
-Notice that the new version of `joinWithLastNameOf` accepts a `PopStar`, then returns another function. The returned function will receive its `firstName` parameter *implicitly* when `map`  is called. You can think of `joinWithLastNameOf` as a function that takes two parameters, but at different times. This is called *Partial Application*. First, it is primed with the value of a `PopStar` and then at some future point, it will receive the value of `firstName`, at which time it will perform its computation. In Functional Programming, Partial Application is analogous to Dependency Injection, but with a lot less syntactic ceremony.
+The new version of `joinWithLastNameOf` accepts a `PopStar`, then returns another function. The returned function will receive its `firstName` parameter *implicitly* when `map`  is called. You can think of `joinWithLastNameOf` as a function that takes two parameters, but at different times. This is called *Partial Application*. First, it is primed with the value of a `PopStar` and then at some future point, it receives the value of `firstName` and performs its computation. In Functional Programming, Partial Application is analogous to Dependency Injection, but with a lot less syntactic ceremony.
 
 ## Stay Tuned
 The discussion continues in [part 2][part2] of this series. For now, the takeaway is: Avoid using `isPresent` and `get` . Once you have an `Optional` in your hands, work inside it by passing in functions and letting the `Optional` type handle the `null` checking for you. And if you feel lambdas are making the code confusing, refactor them into named functions. Think about the structure of those functions and try to leverage the implicit parameter passing that happens when `map` is used. 

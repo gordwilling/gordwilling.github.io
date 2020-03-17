@@ -35,7 +35,7 @@ The authors of Optional were aware of this circumstance and kindly provided a me
 ```java
 Optional<Car> car = person.getSpouse().flatMap(Person::getCar)     
 ```
-This works the way we want, and you'll know when to use it when the compiler complains!
+This works the way we want, and you'll know when to use it when the compiler complains if you don't!
 
 ## Do We Like It?
 
@@ -67,9 +67,9 @@ This does not compile either because the return type is actually `List<Optional<
 We can bend to the wishes of the compiler, but considering the question, *"Does parking need to be provided?"*, a better model would be `Optional<List<Car>>`[^1]. This precisely addresses the two queries
 
 1. *Are there any cars that need parking?*
-1. *If so how many?*
+1. *If so, how many?*
 
-Did the authors of `Optional` take care of this conversion for us as they did with `flatMap`. The answer, to my knowledge, is no. 
+Did the authors of `Optional` take care of this conversion for us as they did with `flatMap`? The answer, to my knowledge, is no. 
 
 ## Next Time
 
