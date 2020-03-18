@@ -2,7 +2,7 @@
 layout: post
 title:  "Optional - The Missing Manual - Part 2"
 ---
-In [part 1][part1] we learned that `map` enables us to work within the *context* of an `Optional` value, handling `null` values implicitly as information moves through a pipeline. We learned that passing *named* functions to `map` improves readability, and how thoughtful use of *Partial Function Application* enhances it even further.
+In [part 1][part1] we learned that `map` enables us to work within the *context* of an `Optional` value, handling `null` implicitly as information moves through a pipeline. We learned that passing *named* functions to `map` improves readability, and how thoughtful use of *Partial Function Application* enhances it even further.
 
 ## Map Is Still Not Enough
 
