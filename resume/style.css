@@ -1,0 +1,93 @@
+body {
+    font-family: sans-serif;
+}
+
+div {
+    padding-right: 0.5em
+}
+
+h3 {
+    margin: 0
+}
+
+.data-binding-error {
+    color: red
+}
+
+.content {
+    display: flex;
+    flex-direction: row;
+}
+
+.left {
+    display: flex;
+    flex-direction: column;
+}
+
+.left ul {
+    padding-left: 1em
+}
+
+.left h4 {
+    margin-left: 15%
+}
+
+.left h5 {
+    margin-top:0;
+    margin-bottom:0;
+}
+
+.summary {
+    margin-left: 15%;
+}
+
+.summary h4 {
+    margin-left: 0
+}
+
+.right {
+    margin-top: 6em;
+    flex-basis: 20%;
+    min-width: 20%;
+}
+
+.right h4 {
+    margin-bottom: 0;
+}
+
+.right h5 {
+    margin-top: 1em;
+    margin-bottom: 0.5em;
+}
+
+.right ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.right li {
+    margin-bottom:0.5em
+}
+
+.date {
+    flex-basis: 15%;
+    min-width:15%;
+    font-size: smaller;
+}
+
+.experience-item {
+    display: flex;
+    flex-direction: row
+}
+
+.past-summary-item {
+    display: flex;
+    flex-direction: row
+}
+
+.education-item {
+    display: flex;
+    flex-direction: row;
+    padding-bottom: 0.5em
+}
+

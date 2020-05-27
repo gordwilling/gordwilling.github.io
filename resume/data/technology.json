@@ -1,0 +1,24 @@
+{
+  "tools": [
+    "C++",
+    "Java",
+    "Kotlin",
+    "Scala",
+    "TypeScript",
+    "Python",
+    "JavaScript",
+    "Angular",
+    "React",
+    "Spring"
+  ],
+  "interests": [
+    "Elixir",
+    "Elm",
+    "Rust",
+    "WASM",
+    "Go",
+    "F#",
+    "OCaml",
+    "Haskell"
+  ]
+}

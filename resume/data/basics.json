@@ -1,0 +1,29 @@
+{
+  "name": "Gordon Wallace",
+  "role": "Senior Software Developer",
+  "summary": "Conscientious and passionate soul with years of experience writing applications. My greatest strength is understanding the fundamentals of how <strong>good software</strong> is built, making me quick to thrive with most tools in most environments.",
+  "address": {
+    "street1": "Suite 1210",
+    "street2": "8 The Esplanade",
+    "city": "Toronto",
+    "province": "ON",
+    "postalCode": "M5E 0A6"
+  },
+  "contact": {
+    "phone": "(416) 318-5398",
+    "email": "gordwilling@yahoo.ca"
+  },
+  "web": {
+    "github": "github.com/gordwilling",
+    "blog": "gordwilling.github.io"
+  },
+  "strengths": [
+    "Absorbing novel concepts",
+    "Empathy",
+    "Technical Leadership",
+    "Communication",
+    "Process Improvement",
+    "Humor"
+  ]
+}
+

@@ -1,0 +1,15 @@
+[
+  {
+    "graduationYear": "Current",
+    "school": "Georgia Tech",
+    "degree": "Master of Computer Science",
+    "specialization": "Machine Learning"
+  },
+  {
+    "graduationYear": "2013",
+    "school": "Lakehead University",
+    "degree": "Bachelor of Engineering",
+    "specialization": "Electrical",
+    "location": "Thunder Bay ON"
+  }
+]

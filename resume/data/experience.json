@@ -1,0 +1,60 @@
+{
+  "selected": [
+    {
+      "startDate": "2017",
+      "endDate": "Present",
+      "role": "Senior Software Developer",
+      "company": "Intelliware Software Development",
+      "location": "Toronto ON",
+      "context": "Develops software solutions for the Financial, Healthcare, and Technology Industries",
+      "bullets": [
+        "Technical leader in the project room producing lots of clean, solid code",
+        "Leading after-hours classes and study groups to mentor colleagues in Functional Programming",
+        "Exploring platforms off the beaten path, such as Elixir and Akka",
+        "Popular contributor to the company technical blog, for example: https://www.intelliware.com/typescript-a-good-part"
+      ]
+    },
+    {
+      "startDate": "2015",
+      "endDate": "2017",
+      "role": "Senior Software Developer - Data Engineering",
+      "company": "Privacy Analytics",
+      "location": "Toronto ON",
+      "context": "Offers data masking and de-identification products to the health industry, safeguarding Protected Health Information under HIPAA privacy law while preserving research value",
+      "bullets": [
+        "Paired with brilliant scientists developing patented statistical algorithms",
+        "Implemented pipelines for data anonymization, generalization, and risk mitigation",
+        "Devised a synthetic-data generation strategy for functional and performance testing",
+        "Rebuilt source repositories and build pipelines to conquer process bottlenecks"
+      ]
+    },
+    {
+      "startDate": "2008",
+      "endDate": "2009",
+      "role": "Lead Performance Analyst",
+      "company": "LG Electronics",
+      "location": "Seoul, South Korea",
+      "context": "LG was consolidating PLM (Product Lifecycle Management) systems from four major divisions into a unified global system",
+      "bullets": [
+        "Conceived and created low-level diagnostic tools that ultimately identified a single systemic flaw. It genuinely saved the multi-million-dollar project"
+      ]
+    },
+    {
+      "startDate": "2005",
+      "endDate": "2008",
+      "role": "Senior Software Developer",
+      "company": "Paxonix (MeadWestvaco)",
+      "location": "Santa Barbara CA, USA",
+      "context": "A trailblazing Software-as-a-Service organization focused on the packaging industry",
+      "bullets": [
+        "Spearheaded the effort to evolve technologically, introducing (then) modern tools like Spring, JUnit, REST, and AJAX.",
+        "Collaborated with product management, customer representatives and development partners, producing web applications on the JVM"
+      ]
+    }
+  ],
+  "ancientTimes": {
+    "startDate": "1999",
+    "endDate": "2004",
+    "synopsis": "Additional developer roles at PrinterOn/Spicer Corporation, MatrixOne, Trek Bicycles, and OpenText are omitted for brevity"
+  }
+}

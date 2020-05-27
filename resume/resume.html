@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
+  <meta http-equiv="Pragma" content="no-cache"/>
+  <meta http-equiv="Expires" content="0"/>
+  <title>${name} - ${role}</title>
+  <script type="module" src="./src/resume.js"></script>
+  <script src="https://kit.fontawesome.com/5a7de7dbf2.js" crossorigin="anonymous"></script>
+  <link href="css/style.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div class="content">
+  <div class="left">
+    <div class="heading" data-template="heading" data-source="basics"></div>
+    <h4><span class="fas fa-plus-circle"></span> Summary</h4>
+    <div class="summary" data-template="summary" data-source="basics"></div>
+    <h4><span class="fas fa-globe-americas"></span> Experience</h4>
+    <div class="experience" data-template="experience-item" data-source="experience.selected"></div>
+    <h4><span class="fas fa-scroll"></span> Ancient Times</h4>
+    <div class="past-summary" data-template="past-summary-item" data-source="experience.ancientTimes"></div>
+    <h4><span class="fas fa-graduation-cap"></span> Education</h4>
+    <div class="education" data-template="education-item" data-source="education"></div>
+  </div>
+  <div class="right">
+    <h4><span class="fas fa-user"></span> Personal Info</h4>
+    <div class="basics" data-template="basics" data-source="basics"></div>
+    <h4><span class="fas fa-award"></span> Strengths</h4>
+    <ul class="strengths" data-template="list-item" data-source="basics.strengths"></ul>
+    <h4><span class="fas fa-tools"></span> Tools</h4>
+    <ul class="tools" data-template="list-item" data-source="technology.tools"></ul>
+    <h4><span class="fas fa-door-open"></span> Most Welcome</h4>
+    <ul class="interests" data-template="list-item" data-source="technology.interests"></ul>
+  </div>
+</div>
+</body>
+<template id="heading">
+  <div>
+    <h1>${name}</h1>
+    <h3>${role}</h3>
+  </div>
+</template>
+<template id="summary">
+  <div>
+    ${summary}
+  </div>
+</template>
+<template id="experience-item">
+  <div class="experience-item">
+    <div class="date">${startDate}-<br/>${endDate}</div>
+    <div class="experience-item-detail">
+      <h5>${role}</h5>
+      ${company}, ${location}<br/>
+      <em>${context}</em>
+      <ul class="experience-item-detail-list" data-template="list-item" data-source="bullets"></ul>
+    </div>
+  </div>
+</template>
+<template id="past-summary-item">
+  <div class="past-summary-item">
+    <div class="date">${startDate}-<br/>${endDate}</div>
+    <div class="past-summary-detail">
+      <em>${synopsis}</em>
+    </div>
+  </div>
+</template>
+<template id="education-item">
+  <div class="education-item">
+    <div class="date">${graduationYear}</div>
+    <div class="education-item-detail">
+      <strong>${degree}</strong>, ${specialization}, ${school}
+    </div>
+  </div>
+</template>
+<template id="basics">
+  <div>
+    <h5>Address</h5>
+    ${address.street1}<br/>
+    ${address.street2}<br/>
+    ${address.city} ${address.province} ${address.postalCode}<br/>
+    <h5>Phone</h5>
+    ${contact.phone}<br/>
+    <h5>Email</h5>
+    ${contact.email}<br/>
+    <h5>GitHub</h5>
+    ${web.github}<br/>
+    <h5>Blog</h5>
+    ${web.blog}<br/>
+  </div>
+</template>
+<template id="list-item">
+  <li>${item}</li>
+</template>
+<template id="spinner">
+  <span class="fas fa-spin fa-circle-notch"></span>
+</template>
+</html>
