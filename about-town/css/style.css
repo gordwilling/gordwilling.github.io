@@ -1,0 +1,37 @@
+body {
+    background: url("../images/front-page-background.png") no-repeat top center fixed;
+    background-size: 1024px;
+}
+
+
+.search {
+    white-space: nowrap;
+    width:50%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 400px;
+    font-family: sans-serif;
+
+}
+
+input[type=text] {
+    padding:8px 8px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 1px solid lightgray;
+}
+
+input[type=text]:focus{
+    outline-color: lightgray;
+}
+
+button {
+    padding:8px 8px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 1px solid lightgray;
+}
+
+button:focus {
+    outline-color: lightgray;
+}
