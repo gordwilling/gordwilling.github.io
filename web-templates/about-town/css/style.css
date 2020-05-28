@@ -1,8 +1,32 @@
 body {
+    font-family: FontAwesome, sans-serif;
+}
+
+body.landing-page {
     background: url("../images/front-page-background.png") no-repeat top center fixed;
     background-size: 1024px;
 }
 
+div.banner {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+div.search-terms {
+    padding-top: 2em;
+    padding-left:2em
+}
+
+div.search-refine {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+}
+
+div.search-results {
+
+}
 
 .search {
     white-space: nowrap;
@@ -10,8 +34,6 @@ body {
     margin-left: auto;
     margin-right: auto;
     margin-top: 400px;
-    font-family: sans-serif;
-
 }
 
 input[type=text] {
@@ -19,19 +41,24 @@ input[type=text] {
     margin: 8px 0;
     box-sizing: border-box;
     border: 1px solid lightgray;
+    border-radius: 16px;
+
 }
 
 input[type=text]:focus{
-    outline-color: lightgray;
+    outline: 0;
 }
 
 button {
     padding:8px 8px;
     margin: 8px 0;
     box-sizing: border-box;
-    border: 1px solid lightgray;
+    border: lightgray;
+    border-radius: 14px;
+    cursor: pointer;
 }
 
 button:focus {
-    outline-color: lightgray;
+    outline: 0;
+    border-color: darkgray;
 }
