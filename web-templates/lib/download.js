@@ -1,5 +1,6 @@
 import {error, info} from "./logging.js";
 import {rootOf, templateDataReadyEvent} from "./templates.js";
+import {notDefined} from "./valueSafety.js";
 
 function verifyStatus(response) {
     if (response.status >= 200 && response.status < 300) {
@@ -38,10 +39,6 @@ function dispatchDataReadyEvent(htmlElement, dataSetName) {
         info(`dispatching 'DataReadyEvent' with '${dataSetName}'`)
         htmlElement.dispatchEvent(templateDataReadyEvent(dataSet, dataSetName))
     }
-}
-
-function notDefined(value) {
-    return typeof value === 'undefined';
 }
 
 async function readResponse(response) {

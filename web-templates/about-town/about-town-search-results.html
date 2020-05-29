@@ -15,29 +15,48 @@
   <a href="about-town.html"><img alt="About Town: Search Local Shops" src="images/search-results-page.png" width="256px"/></a>
   <div class="search-terms">
     <form action="about-town-search-results.html" method="get">
-      <label for="search-terms"></label><input type="text" id="search-terms" name="search-terms" size="60" autofocus/>
+      <label for="searchTermsInput"></label><input type="text" id="searchTermsInput" name="searchTermsInput" size="60" autofocus/>
       <button type="submit"><span class="fas fa-search"></span> Search Local Shops</button>
+      <input type="hidden" id="latitude" value=""/>
+      <input type="hidden" id="longitude" value=""/>
     </form>
     <div class="search-refine">
       <div class="radius">
         <label for="radius">
-          <input type="range" id="radius" name="radius" min="1" step="1" max="50" width="5" value="5"
-                 oninput="radiusOutput.value=radius.value"/>
+          <input type="range" id="radius" name="radius" min="1" step="1" max="50" value="5"
+                 oninput="radiusDisplay.value=radius.value"/>
           within
-          <output id="radiusOutput" name="radiusOutput" for="radius">1</output>
-          km of
+          <output id="radiusDisplay" name="radiusDisplay" for="radius">1</output>
+          km of &nbsp;
         </label>
       </div>
       <div class="location">
-        &nbsp;<a href="javascript:alert('TODO: Link to a location selection widget')">Toronto ON M5E 0A6</a>
+        <div id="locationLoading">
+          <span class="fas fa-spin fa-circle-notch"></span>
+        </div>
+        <div id="locationLoaded" style="display:none">
+          <a href="javascript:editLocationTerms()">
+            <output id="locationTermsView" name="locationTermsView" for="locationTerms"></output>
+            <input type="hidden" id="locationTermsSaved" name="locationTermsSaved"/>
+          </a>
+        </div>
+        <div id="locationEditing" style="display:none">
+          <label for="locationTermsInput">
+            <input type="text" id="locationTermsInput" name="locationTerms" size="30" value="">
+            <button type="submit" id="locationTermsCommit" name="locationTermsCommit"
+                    onclick="commitEditLocationTerms()">
+              <span class="fas fa-check-circle go"></span>
+            </button>
+            <button type="button" id="locationTermsDiscard" name="locationTermsDiscard"
+                    onclick="discardEditLocationTerms()">
+              <span class="fas fa-times-circle stop"></span>
+            </button>
+          </label>
+        </div>
       </div>
     </div>
-
   </div>
 </div>
-
 <hr/>
-
-
 </body>
 </html>
