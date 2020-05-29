@@ -48,7 +48,7 @@ function commitEditLocationTerms() {
                 latitudeInput.value = node["lat"]
                 longitudeInput.value = node["lon"]
                 locationTermsInput.value = node["display_name"]
-                locationTermsView.value = limitLength(node["display_name"])
+                locationTermsView.value = limitLength(node["display_name"], 40)
                 showLocationElement("locationLoaded")
             } else {
                 locationTermsInput.value = "We had trouble finding that"
@@ -80,12 +80,12 @@ function lookupLocationName(searchCoords) {
         const locationTermsView = document.getElementById("locationTermsView")
 
         locationTermsInput.value = locationName
-        locationTermsView.value = limitLength(locationName)
+        locationTermsView.value = limitLength(locationName, 40)
         showLocationElement("locationLoaded")
     })
 }
 
-function limitLength(displayName, limit=40) {
+function limitLength(displayName, limit) {
     const terms = displayName.split(/[,\s]/).filter(nonBlank)
     const uniqueTerms = new Set(terms)
     let truncatedTerms = ""
@@ -126,12 +126,10 @@ function load() {
         if (e.code === "Enter") {
             commitEditLocationTerms()
         } else if (e.code === "Escape") {
-            console.log("pressed Escape")
             discardEditLocationTerms()
         }
     })
     locationTermsInput.addEventListener("focusout", () => {
-        console.log("lost focus")
         discardEditLocationTerms()
     })
 }
