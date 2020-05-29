@@ -12,23 +12,28 @@
 </head>
 <body class="search-results">
 <div class="banner">
-  <a href="about-town.html"><img alt="About Town: Search Local Shops" src="images/search-results-page.png" width="256px"/></a>
-  <div class="search-terms">
-    <form action="about-town-search-results.html" method="get">
-      <label for="searchTermsInput"></label><input type="text" id="searchTermsInput" name="searchTermsInput" size="60" autofocus/>
-      <button type="submit"><span class="fas fa-search"></span> Search Local Shops</button>
-      <input type="hidden" id="latitude" value=""/>
-      <input type="hidden" id="longitude" value=""/>
-    </form>
+  <div class="branding-small">
+    <a href="about-town.html"><img alt="About Town: Search Local Shops" src="images/search-results-page.png" width="256px"/></a>
+  </div>
+  <div class="search_criteria">
+    <div class="search-terms">
+      <form action="about-town-search-results.html" method="get">
+        <label for="searchTermsInput">
+          <input type="text" id="searchTermsInput" name="searchTermsInput" size="60" autofocus/>
+        </label>
+        <button type="submit"><span class="fas fa-search"></span> Search Local Shops</button>
+        <input type="hidden" id="latitude" value=""/>
+        <input type="hidden" id="longitude" value=""/>
+      </form>
+    </div>
     <div class="search-refine">
       <div class="radius">
-        <label for="radius">
-          <input type="range" id="radius" name="radius" min="1" step="1" max="50" value="5"
-                 oninput="radiusDisplay.value=radius.value"/>
-          within
-          <output id="radiusDisplay" name="radiusDisplay" for="radius">1</output>
-          km of &nbsp;
-        </label>
+        <label for="radius"></label>
+        <input type="range" id="radius" name="radius" min="1" step="1" max="50" value="5"
+               oninput="radiusDisplay.value=radius.value"/>
+        within
+        <output id="radiusDisplay" name="radiusDisplay" for="radius">1</output>
+        km of &nbsp;
       </div>
       <div class="location">
         <div id="locationLoading">
@@ -37,7 +42,6 @@
         <div id="locationLoaded" style="display:none">
           <a href="javascript:editLocationTerms()">
             <output id="locationTermsView" name="locationTermsView" for="locationTerms"></output>
-            <input type="hidden" id="locationTermsSaved" name="locationTermsSaved"/>
           </a>
         </div>
         <div id="locationEditing" style="display:none">

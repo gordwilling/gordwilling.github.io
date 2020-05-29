@@ -31,6 +31,7 @@ function editLocationTerms() {
     const locationTermsInput = document.getElementById("locationTermsInput")
     showLocationElement("locationInput")
     locationTermsInput.value = ""
+    locationTermsInput.focus()
 }
 
 function commitEditLocationTerms() {
@@ -66,6 +67,7 @@ function discardEditLocationTerms() {
     }
     else {
         locationTermsInput.value = "Help us Help you..."
+        locationTermsInput.select()
     }
 
 }
@@ -123,9 +125,13 @@ function load() {
     locationTermsInput.addEventListener("keydown", (e) => {
         if (e.code === "Enter") {
             commitEditLocationTerms()
+        } else if (e.code === "Escape") {
+            console.log("pressed Escape")
+            discardEditLocationTerms()
         }
     })
     locationTermsInput.addEventListener("focusout", () => {
+        console.log("lost focus")
         discardEditLocationTerms()
     })
 }

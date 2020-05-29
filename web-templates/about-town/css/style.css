@@ -11,18 +11,32 @@ body.landing-page {
 div.banner {
     display: flex;
     flex-direction: row;
-    align-items: center;
+}
+
+div.search_criteria {
+    display:flex;
+    flex-direction: column;
+    padding-left:2em;
 }
 
 div.search-terms {
-    padding-top: 2em;
-    padding-left: 2em
+    margin-top: auto
 }
 
 div.search-refine {
     display: flex;
     flex-direction: row;
     align-items: baseline;
+    height:4em;
+}
+
+div.location {
+    margin-right:1em
+}
+
+div.radius {
+    padding-top:1em;
+    margin-left:1em;
 }
 
 span.go {
@@ -55,7 +69,7 @@ input[type=text]:focus {
 }
 
 input[type=range] {
-    width:6em
+    width:6em;
 }
 
 button {
