@@ -42,9 +42,14 @@ function commitEditLocationTerms() {
     const locationTermsView = document.getElementById("locationTermsView")
     const latitudeInput = document.getElementById("latitude")
     const longitudeInput = document.getElementById("longitude")
+
     const queryString = encodeURI(locationTermsInput.value)
     if (nonBlank(queryString)) {
-        geocodingLookup(queryString, json => {
+        geocodingLookup(queryString, async json => {
+
+            // locationIQ limits us to 2 requests per second :(
+            await new Promise(r => setTimeout(r, 1100))
+
             const matches = JSON.parse(json)
             const node = matches.filter(node => node["osm_type"] === "node").shift()
             if (isDefined(node)) {
@@ -52,6 +57,12 @@ function commitEditLocationTerms() {
                 longitudeInput.value = node["lon"]
                 locationTermsInput.value = node["display_name"]
                 locationTermsView.value = limitLength(node["display_name"], 40)
+
+                console.log(
+                    `"latitude": "${latitudeInput.value}",
+                    "longitude": "${longitudeInput.value}"`
+                )
+
                 showLocationElement("locationLoaded")
             } else {
                 locationTermsInput.value = "We had trouble finding that"
@@ -75,7 +86,11 @@ function discardEditLocationTerms() {
 }
 
 function lookupLocationName(searchCoords) {
-    geocodingReverseLookup(searchCoords.latitude, searchCoords.longitude, json => {
+    geocodingReverseLookup(searchCoords.latitude, searchCoords.longitude, async json => {
+
+        // locationIQ limits us to 2 requests per second :(
+        await new Promise(r => setTimeout(r, 1100))
+
         const details = JSON.parse(json)
         const locationName = details["display_name"]
         const locationTermsInput = document.getElementById("locationTermsInput")
@@ -127,7 +142,11 @@ function fillSearchResultTemplates(dataReadyEvent) {
                 longitude: entry.longitude
             }
             entry.mapImageURL = mapImageURLFor(userCoords, storeCoords)
-            distancePromises.push(distanceBetween(userCoords, storeCoords).then(json => {
+            distancePromises.push(distanceBetween(userCoords, storeCoords).then(async json => {
+
+                    // locationIQ limits us to 2 requests per second :(
+                    await new Promise(r => setTimeout(r, 1100))
+
                     const response = JSON.parse(json)
                     if (response.code === "Ok") {
                         const distanceInMetres = response["distances"][0][1]

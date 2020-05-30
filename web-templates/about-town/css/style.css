@@ -53,6 +53,11 @@ div.search-results .list-item-images {
     flex-direction: row;
 }
 
+div.search-results .list-item-images .small {
+    display:flex;
+    flex-direction: column;
+}
+
 div.search-results .list-item-info .heading {
     display: flex;
     flex-direction: row;
@@ -64,6 +69,7 @@ div.search-results .list-item-info {
     display: flex;
     flex-direction: column;
     padding-left: 1em;
+    flex-grow: 1
 }
 
 div.search-results .list-item-details {

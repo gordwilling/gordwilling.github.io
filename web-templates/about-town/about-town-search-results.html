@@ -27,10 +27,10 @@
     <div class="search-refine">
       <div class="radius">
         <label for="radius"></label>
-        <input type="range" id="radius" name="radius" min="1" step="1" max="50" value="3"
+        <input type="range" id="radius" name="radius" min="1" step="1" max="50" value="5"
                oninput="radiusDisplay.value=radius.value"/>
         within
-        <output id="radiusDisplay" name="radiusDisplay" for="radius">3</output>
+        <output id="radiusDisplay" name="radiusDisplay" for="radius">5</output>
         km of&nbsp;
       </div>
       <div class="location">
@@ -97,9 +97,9 @@
 <template id="list-item-images">
   <div class="list-item-images">
     <div class="small">
-      <img src="${alpha.src}" alt="${alpha.alt}" height="66"/>
-      <img src="${b.src}" alt="${b.alt}" height="66"/>
-      <img src="${c.src}" alt="${c.alt}" height="66"/>
+      <div><img src="${alpha.src}" alt="${alpha.alt}" height="66"/></div>
+      <div><img src="${b.src}" alt="${b.alt}" height="66"/></div>
+      <div><img src="${c.src}" alt="${c.alt}" height="66"/></div>
     </div>
     <div class="large">
       <img src="${d.src}" alt="${d.alt}" height="200"/>

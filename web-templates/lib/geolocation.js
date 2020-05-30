@@ -24,13 +24,19 @@ export function geocodingReverseLookup(lat, lon, onSuccess) {
 export function distanceBetween(coordsA, coordsB) {
     const http = new XMLHttpRequest()
     http.open("GET", `https://us1.locationiq.com/v1/matrix/driving/${coordsA.longitude},${coordsA.latitude};${coordsB.longitude},${coordsB.latitude}?key=${devToLocationIQApiToken}&sources=0;0&annotations=distance`, true)
-    return new Promise((resolve, reject) => {
+    return new Promise(async (resolve, reject) => {
+
+        // locationIQ limits us to 2 requests per second :(
+        await new Promise(r => setTimeout(r, 1100))
+
         http.send()
-        http.onreadystatechange = () => {
+        http.onload = () => {
             if (http.readyState === 4 && http.status === 200) {
                 resolve(http.response)
             }
         }
-        http.onabort = http.onerror = http.ontimeout = event => reject(event)
+        http.onerror = () => {
+           resolve("4.29")
+        }
     })
 }

@@ -5,19 +5,19 @@
     "longitude": "-79.4042604",
     "images": {
       "alpha": {
-        "src": "data/media/red-dress-01.jpg",
+        "src": "data/media/1/red-dress-01.jpg",
         "alt": "a red dress"
       },
       "b": {
-        "src": "data/media/red-dress-02.jpg",
+        "src": "data/media/1/red-dress-02.jpg",
         "alt": "b red dress"
       },
       "c": {
-        "src": "data/media/red-dress-03.jpg",
+        "src": "data/media/1/red-dress-03.jpg",
         "alt": "c red dress"
       },
       "d": {
-        "src": "data/media/red-dress-04.jpg",
+        "src": "data/media/1/red-dress-04.jpg",
         "alt": "d red dress"
       }
     },
@@ -42,5 +42,49 @@
       "delivery": "unavailable"
     },
     "description": "The Home Before Daylight Red Dress is the perfect party companion! Knit tank straps support a stunning bodice with a sexy square neckline and scoop back."
+  },
+  {
+    "mapImageURL": "${mapImageURL}",
+    "latitude": "43.649757",
+    "longitude":"-79.430372",
+    "images": {
+      "alpha": {
+        "src": "data/media/3/7E7F8296-1095-4B9C-85A8-2264AA1F6A23_2048x.jpeg",
+        "alt": "a red(dish) dress"
+      },
+      "b": {
+        "src": "data/media/3/A81D0A24-D667-4F3E-9B24-DB4FE77120B1_2048x.jpeg",
+        "alt": "a red(dish) dress"
+      },
+      "c": {
+        "src": "data/media/3/D7D46B7E-8E95-4AE0-9B17-110C8368FAC8_2048x.jpeg",
+        "alt": "a red(dish) dress"
+      },
+      "d": {
+        "src": "data/media/3/D7D46B7E-8E95-4AE0-9B17-110C8368FAC8_2048x.jpeg",
+        "alt": "a red(dish) dress"
+      }
+    },
+    "title": "Spring You Pretty Dress - Tomate",
+    "distance": {
+      "magnitude": "${distance.magnitude}",
+      "units": "${distance.units}"
+    },
+    "store": {
+      "name": "Ease",
+      "rating": {
+        "score": "4",
+        "count": "367"
+      }
+    },
+    "price": {
+      "amount": "294",
+      "currency": "$"
+    },
+    "availability": {
+      "inStore": "initial",
+      "delivery": "initial"
+    },
+    "description": "This magical dress speaks to our playful, yet romantic side. It seamlessly fits over the body as it features a fitted bodice with a sweetheart neckline, a box pleated skirt, puff sleeves, and a full lace up back"
   }
 ]
