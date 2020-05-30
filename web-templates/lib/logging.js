@@ -3,7 +3,7 @@ export const level = {
     error: "error",
 }
 
-export let logLevel = level.error
+export let logLevel = level.info
 
 export function info(message) {
     if (logLevel === level.info) {

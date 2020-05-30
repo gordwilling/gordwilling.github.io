@@ -43,11 +43,12 @@ function dispatchDataReadyEvent(htmlElement, dataSetName) {
 
 async function readResponse(response) {
     // simulate network latency with random waits
-    await new Promise(r => setTimeout(r, Math.floor(Math.random() * 5000)))
+    // await new Promise(r => setTimeout(r, Math.floor(Math.random() * 5000)))
     return response.json()
 }
 
-export function downloadTemplateData(templateRefs, dataLocations) {
+export function downloadTemplateData(templateRefs, dataLocations, onTemplateDataReady) {
+    document.body.addEventListener('template-data-ready', onTemplateDataReady)
     const dataStatus = {}
     const downloadStatus = {}
     templateRefs.forEach(node => {

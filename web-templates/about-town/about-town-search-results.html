@@ -17,22 +17,20 @@
   </div>
   <div class="search_criteria">
     <div class="search-terms">
-      <form action="about-town-search-results.html" method="get">
-        <label for="searchTermsInput">
-          <input type="text" id="searchTermsInput" name="searchTermsInput" size="60" autofocus/>
-        </label>
-        <button type="submit"><span class="fas fa-search"></span> Search Local Shops</button>
-        <input type="hidden" id="latitude" value=""/>
-        <input type="hidden" id="longitude" value=""/>
-      </form>
+      <label for="searchTermsInput">
+        <input type="text" id="searchTermsInput" name="searchTermsInput" size="60" autofocus/>
+      </label>
+      <button onclick="search()"><span class="fas fa-search"></span> Search Local Shops</button>
+      <input type="hidden" id="latitude" value=""/>
+      <input type="hidden" id="longitude" value=""/>
     </div>
     <div class="search-refine">
       <div class="radius">
         <label for="radius"></label>
-        <input type="range" id="radius" name="radius" min="1" step="1" max="50" value="5"
+        <input type="range" id="radius" name="radius" min="1" step="1" max="50" value="3"
                oninput="radiusDisplay.value=radius.value"/>
         within
-        <output id="radiusDisplay" name="radiusDisplay" for="radius">1</output>
+        <output id="radiusDisplay" name="radiusDisplay" for="radius">3</output>
         km of&nbsp;
       </div>
       <div class="location">
@@ -62,72 +60,66 @@
   </div>
 </div>
 <hr/>
-<div class="search-results">
+<div class="search-results" data-template="list-item" data-source="searchResults"></div>
+</body>
+<template id="list-item">
   <div class="list-item">
     <div class="list-item-map">
-      <img src="https://maps.locationiq.com/v2/staticmap?key=pk.5daf8473c483849c31f9a4344a16af55&maptype=roadmap&size=320x200&markers=icon:small-purple-cutout|43.645924,-79.3765342&markers=icon:small-red-cutout|43.6552136,-79.4042604"
-           crossorigin="anonymous" alt="map of [43.645924,-79.3765342]"/>
+      <img src="${mapImageURL}" crossorigin="anonymous" alt="map of [${latitude},${longitude}]"/>
     </div>
-    <div class="list-item-images">
-      <div>
-        <img src="data/media/red-dress-02.jpg" alt="red dress" height="65"/>
-        <img src="data/media/red-dress-03.jpg" alt="red dress" height="65"/>
-        <img src="data/media/red-dress-04.jpg" alt="red dress" height="65"/>
-      </div>
-      <div>
-        <img src="data/media/red-dress-01.jpg" alt="red dress" height="200"/>
-      </div>
-    </div>
+    <div class="list-item-images" data-template="list-item-images" data-source="images"></div>
     <div class="list-item-info">
-      <div class="list-item-title">
-        Home Before Daylight Red Dress
+      <div class="heading">
+        <div class="title">${title}</div>
+        <div class="distance">${distance.magnitude}${distance.units}</div>
       </div>
       <div class="list-item-details">
         <div class="store">
           <div class="name">
-            <a href="">Exile</a>
+            <a href="">${store.name}</a>
           </div>
-          <div class="rating">
-            <span class="fas fa-star filled"></span>
-            <span class="fas fa-star filled"></span>
-            <span class="fas fa-star filled"></span>
-            <span class="fas fa-star filled"></span>
-            <span class="fal fa-star"></span>
-            <span class="rating-count"> <a href="">3652 ratings</a></span>
-          </div>
+          <div class="rating" data-template="rating" data-source="store.rating"></div>
         </div>
         <div class="purchase-details">
-          <div class="price">
-            $45.69
+          <div class="price">${price.currency}${price.amount}</div>
+          <div>Available
+            <ul>
+              <li class="${availability.inStore}">In Store</li>
+              <li class="${availability.delivery}">Delivery</li>
+            </ul>
           </div>
-          <div>
-            <div>
-              Available
-              <ul>
-                <li>In Store</li>
-                <li class="unavailable">Delivery</li>
-              </ul>
-            </div>
-          </div>
-          <div class="features">
-            The Home Before Daylight Red Dress is the perfect party companion! Knit tank straps support a stunning bodice with a sexy square neckline and scoop back.
-            <div class="sizes">
-              <label for="sizes">Sizes</label>
-              <select id="sizes" name="sizes">
-                <option>XS</option>
-                <option>S</option>
-                <option selected>M</option>
-                <option>L</option>
-                <option>XL</option>
-                <option>XXL</option>
-              </select>
-            </div>
-          </div>
+          <div class="features">${description}</div>
         </div>
       </div>
     </div>
   </div>
-</div>
-</body>
+</template>
+<template id="list-item-images">
+  <div class="list-item-images">
+    <div class="small">
+      <img src="${alpha.src}" alt="${alpha.alt}" height="66"/>
+      <img src="${b.src}" alt="${b.alt}" height="66"/>
+      <img src="${c.src}" alt="${c.alt}" height="66"/>
+    </div>
+    <div class="large">
+      <img src="${d.src}" alt="${d.alt}" height="200"/>
+    </div>
+  </div>
+</template>
+<template id="rating">
+  <div class="rating">
+    <span class="fas fa-star filled"></span>
+    <span class="fas fa-star filled"></span>
+    <span class="fas fa-star filled"></span>
+    <span class="fas fa-star filled"></span>
+    <span class="fal fa-star"></span>
+    <span class="rating-count"> <a href="">${count} store ratings</a></span>
+  </div>
+</template>
+<template id="spinner">
+  <div>
+    <span class="fas fa-spin fa-circle-notch"></span>
+  </div>
+</template>
 </html>
 

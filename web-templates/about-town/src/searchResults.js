@@ -1,5 +1,8 @@
-import {geocodingReverseLookup, geocodingLookup, staticMapURI} from "../../lib/geolocation.js";
+import {geocodingReverseLookup, geocodingLookup, distanceBetween, staticMapURI} from "../../lib/geolocation.js";
 import {isBlank, isDefined, nonBlank} from "../../lib/valueSafety.js";
+import {downloadTemplateData} from "../../lib/download.js";
+import {fillTemplateData} from "../../lib/templates.js";
+import {info} from "../../lib/logging.js";
 
 function showLocationElement(visibleElementId) {
     const locationLoading = document.getElementById("locationLoading")
@@ -64,8 +67,7 @@ function discardEditLocationTerms() {
     const longitudeInput = document.getElementById("longitude")
     if (nonBlank(latitudeInput.value) && nonBlank(longitudeInput.value)) {
         showLocationElement("locationLoaded")
-    }
-    else {
+    } else {
         locationTermsInput.value = "Help us Help you..."
         locationTermsInput.select()
     }
@@ -102,27 +104,82 @@ function limitLength(displayName, limit) {
     return truncatedTerms.trimEnd()
 }
 
-function mapImageUrlFor(coords) {
-    return `${staticMapURI}&center=${coords.latitude},${coords.longitude}`
+function mapImageURLFor(userCoords, storeCoords) {
+    return `${staticMapURI}&markers=icon:small-purple-cutout|${userCoords.latitude},${userCoords.longitude}&markers=icon:small-red-cutout|${storeCoords.latitude},${storeCoords.longitude}`
+}
+
+function currentUserCoords() {
+    return {
+        latitude: document.getElementById("latitude").value,
+        longitude: document.getElementById("longitude").value
+    }
+}
+
+function fillSearchResultTemplates(dataReadyEvent) {
+    if (dataReadyEvent.detail.dataSetName === 'searchResults') {
+        const data = dataReadyEvent.detail.dataSet
+        info("adding user-specific to data to template data")
+        const userCoords = currentUserCoords()
+        const distancePromises = []
+        for (const entry of data) {
+            const storeCoords = {
+                latitude: entry.latitude,
+                longitude: entry.longitude
+            }
+            entry.mapImageURL = mapImageURLFor(userCoords, storeCoords)
+            distancePromises.push(distanceBetween(userCoords, storeCoords).then(json => {
+                    const response = JSON.parse(json)
+                    if (response.code === "Ok") {
+                        const distanceInMetres = response["distances"][0][1]
+                        const distanceInKm = (distanceInMetres / 1000).toFixed(2)
+                        entry.distance = {
+                            magnitude: distanceInKm,
+                            units: "km"
+                        }
+                        return Promise.resolve()
+                    } else {
+                        return Promise.reject(json)
+                    }
+                })
+            )
+        }
+        Promise.all(distancePromises).then(() => {
+            fillTemplateData(dataReadyEvent)
+        })
+    }
+}
+
+function search() {
+    const userCoords = currentUserCoords()
+    if (isBlank(userCoords.latitude) || isBlank(userCoords.longitude)) {
+        showLocationElement("locationInput")
+    } else {
+        const dataLocations = {
+            searchResults: "./data/listItem.json"
+        }
+        const searchResultDiv = document.querySelector("[data-template]")
+        searchResultDiv.innerHTML = ""
+        downloadTemplateData([searchResultDiv], dataLocations, fillSearchResultTemplates)
+    }
 }
 
 function load() {
     const requestParams = new URL(location.href).searchParams
     const searchTerms = requestParams.get("searchTerms")
-    const searchCoords = {
+    const userCoords = {
         latitude: requestParams.get("latitude"),
         longitude: requestParams.get("longitude")
     }
 
     document.getElementById("searchTermsInput").value = searchTerms
-    document.getElementById("latitude").value = searchCoords.latitude
-    document.getElementById("longitude").value = searchCoords.longitude
+    document.getElementById("latitude").value = userCoords.latitude
+    document.getElementById("longitude").value = userCoords.longitude
 
-    if (isBlank(searchCoords.latitude) || isBlank(searchCoords.longitude)) {
+    if (isBlank(userCoords.latitude) || isBlank(userCoords.longitude)) {
         showLocationElement("locationInput")
-    } else if (searchCoords.latitude && searchCoords.longitude) {
+    } else if (userCoords.latitude && userCoords.longitude) {
         showLocationElement("locationLoading");
-        lookupLocationName(searchCoords);
+        lookupLocationName(userCoords);
     }
 
     const locationTermsInput = document.getElementById("locationTermsInput")
@@ -136,9 +193,12 @@ function load() {
     locationTermsInput.addEventListener("focusout", () => {
         discardEditLocationTerms()
     })
+    search()
 }
 
 window.editLocationTerms = editLocationTerms
 window.commitEditLocationTerms = commitEditLocationTerms
 window.discardEditLocationTerms = discardEditLocationTerms
+window.search = search
 window.onload = load
+

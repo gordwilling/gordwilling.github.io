@@ -1,0 +1,46 @@
+[
+  {
+    "mapImageURL": "${mapImageURL}",
+    "latitude": "43.6552136",
+    "longitude": "-79.4042604",
+    "images": {
+      "alpha": {
+        "src": "data/media/red-dress-01.jpg",
+        "alt": "a red dress"
+      },
+      "b": {
+        "src": "data/media/red-dress-02.jpg",
+        "alt": "b red dress"
+      },
+      "c": {
+        "src": "data/media/red-dress-03.jpg",
+        "alt": "c red dress"
+      },
+      "d": {
+        "src": "data/media/red-dress-04.jpg",
+        "alt": "d red dress"
+      }
+    },
+    "title": "Home Before Daylight Red Dress",
+    "distance": {
+      "magnitude": "${distance.magnitude}",
+      "units": "${distance.units}"
+    },
+    "store": {
+      "name": "Exile",
+      "rating": {
+        "score": "4",
+        "count": "3652"
+      }
+    },
+    "price": {
+      "amount": "45.69",
+      "currency": "$"
+    },
+    "availability": {
+      "inStore": "initial",
+      "delivery": "unavailable"
+    },
+    "description": "The Home Before Daylight Red Dress is the perfect party companion! Knit tank straps support a stunning bodice with a sexy square neckline and scoop back."
+  }
+]

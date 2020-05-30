@@ -53,8 +53,11 @@ div.search-results .list-item-images {
     flex-direction: row;
 }
 
-div.search-results .list-item-title {
+div.search-results .list-item-info .heading {
+    display: flex;
+    flex-direction: row;
     font-size: x-large;
+    justify-content: space-between;
 }
 
 div.search-results .list-item-info {
@@ -85,7 +88,7 @@ div.store .rating .filled {
 }
 
 div.store .rating-count {
-    padding-left: 2em;
+    padding-left: 1em;
 }
 
 div.purchase-details {

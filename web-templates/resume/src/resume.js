@@ -13,7 +13,7 @@ function initTemplates() {
     downloadTemplateData(templateRefs, dataLocations)
 }
 
-document.body.addEventListener('template-data-ready', fillTemplateData())
+document.body.addEventListener('template-data-ready', fillTemplateData)
 document.body.addEventListener("template-data-ready", (dataReady) => {
     if (dataReady.detail.dataSetName === 'basics') {
         document.title = merge(document.title, dataReady.detail.dataSet)
