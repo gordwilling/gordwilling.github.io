@@ -10,7 +10,7 @@
   <script type="module" src="src/searchResults.js"></script>
   <script src="https://kit.fontawesome.com/5a7de7dbf2.js" crossorigin="anonymous"></script>
 </head>
-<body class="search-results">
+<body>
 <div class="banner">
   <div class="branding-small">
     <a href="about-town.html"><img alt="About Town: Search Local Shops" src="images/search-results-page.png" width="256px"/></a>
@@ -33,7 +33,7 @@
                oninput="radiusDisplay.value=radius.value"/>
         within
         <output id="radiusDisplay" name="radiusDisplay" for="radius">1</output>
-        km of &nbsp;
+        km of&nbsp;
       </div>
       <div class="location">
         <div id="locationLoading">
@@ -62,5 +62,72 @@
   </div>
 </div>
 <hr/>
+<div class="search-results">
+  <div class="list-item">
+    <div class="list-item-map">
+      <img src="https://maps.locationiq.com/v2/staticmap?key=pk.5daf8473c483849c31f9a4344a16af55&maptype=roadmap&size=320x200&markers=icon:small-purple-cutout|43.645924,-79.3765342&markers=icon:small-red-cutout|43.6552136,-79.4042604"
+           crossorigin="anonymous" alt="map of [43.645924,-79.3765342]"/>
+    </div>
+    <div class="list-item-images">
+      <div>
+        <img src="data/media/red-dress-02.jpg" alt="red dress" height="65"/>
+        <img src="data/media/red-dress-03.jpg" alt="red dress" height="65"/>
+        <img src="data/media/red-dress-04.jpg" alt="red dress" height="65"/>
+      </div>
+      <div>
+        <img src="data/media/red-dress-01.jpg" alt="red dress" height="200"/>
+      </div>
+    </div>
+    <div class="list-item-info">
+      <div class="list-item-title">
+        Home Before Daylight Red Dress
+      </div>
+      <div class="list-item-details">
+        <div class="store">
+          <div class="name">
+            <a href="">Exile</a>
+          </div>
+          <div class="rating">
+            <span class="fas fa-star filled"></span>
+            <span class="fas fa-star filled"></span>
+            <span class="fas fa-star filled"></span>
+            <span class="fas fa-star filled"></span>
+            <span class="fal fa-star"></span>
+            <span class="rating-count"> <a href="">3652 ratings</a></span>
+          </div>
+        </div>
+        <div class="purchase-details">
+          <div class="price">
+            $45.69
+          </div>
+          <div>
+            <div>
+              Available
+              <ul>
+                <li>In Store</li>
+                <li class="unavailable">Delivery</li>
+              </ul>
+            </div>
+          </div>
+          <div class="features">
+            The Home Before Daylight Red Dress is the perfect party companion! Knit tank straps support a stunning bodice with a sexy square neckline and scoop back.
+            <div class="sizes">
+              <label for="sizes">Sizes</label>
+              <select id="sizes" name="sizes">
+                <option>XS</option>
+                <option>S</option>
+                <option selected>M</option>
+                <option>L</option>
+                <option>XL</option>
+                <option>XXL</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 </body>
 </html>
+

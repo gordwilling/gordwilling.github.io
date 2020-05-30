@@ -1,6 +1,5 @@
 body {
     font-family: FontAwesome, sans-serif;
-    font-size: smaller;
 }
 
 body.landing-page {
@@ -37,6 +36,80 @@ div.location {
 div.radius {
     padding-top:1em;
     margin-left:1em;
+}
+
+div.search-results {
+    display:flex;
+    flex-direction: column;
+}
+
+div.search-results .list-item {
+    display:flex;
+    flex-direction: row;
+}
+
+div.search-results .list-item-images {
+    display:flex;
+    flex-direction: row;
+}
+
+div.search-results .list-item-title {
+    font-size: x-large;
+}
+
+div.search-results .list-item-info {
+    display: flex;
+    flex-direction: column;
+    padding-left: 1em;
+}
+
+div.search-results .list-item-details {
+    display: flex;
+    flex-direction: column;
+}
+
+div.store {
+    display:flex;
+    flex-direction: row;
+    align-items: baseline;
+    padding-top:1em;
+}
+
+div.store .name {
+    padding-right:1em
+}
+
+div.store .rating .filled {
+    -webkit-text-stroke: 1px black;
+    -webkit-text-fill-color: yellow;
+}
+
+div.store .rating-count {
+    padding-left: 2em;
+}
+
+div.purchase-details {
+    display: flex;
+    flex-direction: row;
+    padding-top: 1em;
+}
+
+div.purchase-details .price {
+    font-size: x-large;
+    color: darkred;
+    padding-right: 1em
+}
+
+div.purchase-details .features {
+    padding-left: 1em;
+}
+
+div.purchase-details .sizes {
+    padding-top: 1em;
+}
+
+div.purchase-details ul {
+    padding-left:1em
 }
 
 span.go {
@@ -83,4 +156,8 @@ button {
 
 button:focus {
     outline: 0;
+}
+
+li.unavailable {
+  text-decoration: line-through;
 }

@@ -4,7 +4,7 @@ export class BasicHttpRequest extends XMLHttpRequest {
         super()
         this.onreadystatechange = () => {
             if (this.readyState === 4 && this.status === 200) {
-                this.onSuccess(this.responseText)
+                this.onSuccess(this.response)
             }
         }
     }

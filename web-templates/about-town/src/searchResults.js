@@ -1,4 +1,4 @@
-import {geocodingReverseLookup, geocodingLookup} from "../../lib/geolocation.js";
+import {geocodingReverseLookup, geocodingLookup, staticMapURI} from "../../lib/geolocation.js";
 import {isBlank, isDefined, nonBlank} from "../../lib/valueSafety.js";
 
 function showLocationElement(visibleElementId) {
@@ -100,6 +100,10 @@ function limitLength(displayName, limit) {
         }
     }
     return truncatedTerms.trimEnd()
+}
+
+function mapImageUrlFor(coords) {
+    return `${staticMapURI}&center=${coords.latitude},${coords.longitude}`
 }
 
 function load() {
