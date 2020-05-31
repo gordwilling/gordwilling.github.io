@@ -1,5 +1,41 @@
-import {mapsApiKey} from "./geolocationApiKey.js";
-export const staticMapURI = `https://maps.googleapis.com/maps/api/staticmap?key=${mapsApiKey}&size=320x200`
+export function initMapsApi(key) {
+    const script = document.createElement("script")
+    script.src = `https://maps.googleapis.com/maps/api/js?key=${key}`
+    script.async = true
+    script.defer = true
+    document.head.append(script)
+    staticMapURI = initStaticMapURI(key)
+}
+
+const initStaticMapURI = key => () => {
+    return `https://maps.googleapis.com/maps/api/staticmap?key=${key}&size=320x200`
+}
+
+export function staticMapURI() {
+    return "invoke initMapsApi with a valid key first"
+}
+
+/**
+ * Wraps navigator.getCurrentPosition in a promise
+ * @returns {Promise} a Promise resolving to {latitude, longitude}
+ */
+export function currentPosition() {
+    return new Promise((resolve, reject) => {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(position => {
+                    resolve({
+                        latitude: position.coords.latitude,
+                        longitude: position.coords.longitude
+                    })
+                }, error => {
+                    reject(error)
+                }
+            )
+        } else {
+            reject("Location services is not enabled")
+        }
+    })
+}
 
 export function geocodingLookup(queryString) {
     const geocoder = new google.maps.Geocoder;

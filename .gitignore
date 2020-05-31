@@ -3,4 +3,4 @@ _site
 .jekyll-cache
 .jekyll-metadata
 vendor
-web-templates/lib/geoLocationApiKey.json
+web-templates/lib/geoLocationApiKey

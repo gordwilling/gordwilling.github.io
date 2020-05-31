@@ -7,17 +7,14 @@
   <meta http-equiv="Expires" content="0"/>
   <title>About Town</title>
   <link rel="stylesheet" type="text/css" href="css/style.css"/>
+  <script type="module" src="src/aboutTown.js"></script>
   <script src="https://kit.fontawesome.com/5a7de7dbf2.js" crossorigin="anonymous"></script>
-  <script>
-      if (navigator.geolocation) {
-          navigator.geolocation.getCurrentPosition(position => {
-              document.getElementById("latitude").value = position.coords.latitude
-              document.getElementById("longitude").value = position.coords.longitude
-          })
-      }
-  </script>
 </head>
 <body class="landing-page">
+<a class="your-location" id="location-anchor" href="">
+  <span class="fas fa-spin fa-circle-notch"></span>
+  Asking for your location...
+</a>
 <div class="search">
   <form action="about-town-search-results.html" method="get">
     <label for="searchTerms"></label><input type="text" id="searchTerms" name="searchTerms" size="48" autofocus/>

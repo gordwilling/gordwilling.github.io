@@ -7,7 +7,7 @@
   <meta http-equiv="Expires" content="0"/>
   <title></title>
   <link rel="stylesheet" type="text/css" href="css/style.css"/>
-  <script type="module" src="src/searchResults.js"></script>
+  <script type="module" src="src/aboutTownSearchResults.js"></script>
   <script src="https://kit.fontawesome.com/5a7de7dbf2.js" crossorigin="anonymous"></script>
 </head>
 <body>
@@ -59,13 +59,6 @@
     </div>
   </div>
 </div>
-<script type="module">
-    const script = document.createElement("script")
-    script.src = `https://maps.googleapis.com/maps/api/js?key=${mapsApiKey}`
-    script.async = true
-    script.defer = true
-    document.head.append(script)
-</script>
 <hr/>
 <div class="search-results" data-template="list-item" data-source="searchResults"></div>
 </body>
@@ -129,4 +122,3 @@
   </div>
 </template>
 </html>
-

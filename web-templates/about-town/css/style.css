@@ -13,9 +13,9 @@ div.banner {
 }
 
 div.search_criteria {
-    display:flex;
+    display: flex;
     flex-direction: column;
-    padding-left:2em;
+    padding-left: 2em;
 }
 
 div.search-terms {
@@ -26,35 +26,35 @@ div.search-refine {
     display: flex;
     flex-direction: row;
     align-items: baseline;
-    height:4em;
+    height: 4em;
 }
 
 div.location {
-    margin-right:1em
+    margin-right: 1em
 }
 
 div.radius {
-    padding-top:1em;
-    margin-left:1em;
+    padding-top: 1em;
+    margin-left: 1em;
 }
 
 div.search-results {
-    display:flex;
+    display: flex;
     flex-direction: column;
 }
 
 div.search-results .list-item {
-    display:flex;
+    display: flex;
     flex-direction: row;
 }
 
 div.search-results .list-item-images {
-    display:flex;
+    display: flex;
     flex-direction: row;
 }
 
 div.search-results .list-item-images .small {
-    display:flex;
+    display: flex;
     flex-direction: column;
 }
 
@@ -78,14 +78,14 @@ div.search-results .list-item-details {
 }
 
 div.store {
-    display:flex;
+    display: flex;
     flex-direction: row;
     align-items: baseline;
-    padding-top:1em;
+    padding-top: 1em;
 }
 
 div.store .name {
-    padding-right:1em
+    padding-right: 1em
 }
 
 div.store .rating .filled {
@@ -118,15 +118,20 @@ div.purchase-details .sizes {
 }
 
 div.purchase-details ul {
-    padding-left:1em
+    padding-left: 1em
 }
 
 span.go {
-    color:green
+    color: green
 }
 
 span.stop {
-    color:red
+    color: red
+}
+
+a.your-location {
+    position: sticky;
+    font-size: x-small;
 }
 
 .search {
@@ -134,7 +139,7 @@ span.stop {
     width: 50%;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 400px;
+    margin-top: 378px;
 }
 
 input[type=text] {
@@ -151,7 +156,7 @@ input[type=text]:focus {
 }
 
 input[type=range] {
-    width:6em;
+    width: 6em;
 }
 
 button {
@@ -168,5 +173,5 @@ button:focus {
 }
 
 li.unavailable {
-  text-decoration: line-through;
+    text-decoration: line-through;
 }
