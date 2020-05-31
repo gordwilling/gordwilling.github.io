@@ -1,5 +1,5 @@
-import {distanceBetween, geocodingLookup, geocodingReverseLookup, initMapsApi, staticMapURI} from "../../lib/geolocation.js";
-import {isBlank, nonBlank} from "../../lib/valueSafety.js";
+import {distanceBetween, geocodingReverseLookup, initMapsApi, staticMapURI} from "../../lib/geolocation.js";
+import {isBlank, isDefined, nonBlank} from "../../lib/valueSafety.js";
 import {downloadTemplateData} from "../../lib/download.js";
 import {fillTemplateData} from "../../lib/templates.js";
 import {fetchApiKey} from "../../lib/geolocationApiKey.js";
@@ -39,21 +39,18 @@ fetchApiKey().then(initMapsApi).then(() => {
         locationTermsInput.focus()
     }
 
-    function commitEditLocationTerms() {
+    function commitEditLocationTerms(place) {
         const locationTermsInput = document.getElementById("locationTermsInput")
         const locationTermsView = document.getElementById("locationTermsView")
         const latitudeInput = document.getElementById("latitude")
         const longitudeInput = document.getElementById("longitude")
 
-        const queryString = encodeURI(locationTermsInput.value)
-        if (nonBlank(queryString)) {
-            geocodingLookup(queryString).then(location => {
-                latitudeInput.value = location.coords.latitude
-                longitudeInput.value = location.coords.longitude
-                locationTermsInput.value = location.address
-                locationTermsView.value = location.address
-                showLocationElement("locationLoaded")
-            })
+        if (isDefined(place)) {
+            latitudeInput.value = place["geometry"].location.lat()
+            longitudeInput.value = place["geometry"].location.lng()
+            locationTermsInput.value = place["formatted_address"]
+            locationTermsView.value = place["formatted_address"]
+            showLocationElement("locationLoaded")
         }
     }
 
@@ -67,7 +64,6 @@ fetchApiKey().then(initMapsApi).then(() => {
             locationTermsInput.value = "Help us Help you..."
             locationTermsInput.select()
         }
-
     }
 
     function lookupLocationName(searchCoords) {
@@ -170,6 +166,21 @@ fetchApiKey().then(initMapsApi).then(() => {
         })
         locationTermsInput.addEventListener("focusout", () => {
             discardEditLocationTerms()
+        })
+
+        const currentLocation = new google.maps.LatLng(
+            parseFloat(userCoords.latitude),
+            parseFloat(userCoords.longitude))
+
+        const options = {
+            location: currentLocation,
+            origin: currentLocation,
+            types: ["geocode"],
+            fields: ["formatted_address", "geometry.location"]
+        }
+        const autocomplete = new google.maps.places.Autocomplete(locationTermsInput, options)
+        autocomplete.addListener('place_changed', () => {
+            commitEditLocationTerms(autocomplete.getPlace())
         })
         search()
     }
