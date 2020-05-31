@@ -11,17 +11,28 @@
   <script src="https://kit.fontawesome.com/5a7de7dbf2.js" crossorigin="anonymous"></script>
 </head>
 <body class="landing-page">
-<a class="your-location" id="location-anchor" href="">
-  <span class="fas fa-spin fa-circle-notch"></span>
-  Asking for your location...
-</a>
-<div class="search">
-  <form action="about-town-search-results.html" method="get">
-    <label for="searchTerms"></label><input type="text" id="searchTerms" name="searchTerms" size="48" autofocus/>
-    <button type="submit"><span class="fas fa-search"></span> Search Local Shops</button>
+<form action="about-town-search-results.html" method="get">
+  <div class="landing-search-form">
+    <div class="landing-search-fields">
+      <div>
+        <label for="searchTerms"></label>
+        <input type="text" id="searchTerms" name="searchTerms" size="48" autofocus/>
+      </div>
+      <div id="your-location" class="landing-search-location">
+        <span class="fas fa-spin fa-circle-notch"></span>
+        Asking for your location...
+      </div>
+    </div>
+    <div>
+      <div>
+        <button type="submit"><span class="fas fa-search"></span> Search Local Shops</button>
+      </div>
+    </div>
     <input type="hidden" id="latitude" name="latitude" value=""/>
     <input type="hidden" id="longitude" name="longitude" value=""/>
-  </form>
-</div>
+  </div>
+</form>
+
+
 </body>
 </html>

@@ -2,7 +2,7 @@ import {currentPosition, initMapsApi, geocodingReverseLookup} from "../../lib/ge
 import {fetchApiKey} from "../../lib/geolocationApiKey.js";
 
 function initLocation() {
-    const locationAnchor = document.getElementById("location-anchor")
+    const yourLocation = document.getElementById("your-location")
 
     fetchApiKey()
         .then(initMapsApi)
@@ -13,10 +13,10 @@ function initLocation() {
             return geocodingReverseLookup(coords.latitude, coords.longitude)
         })
         .then(locationName => {
-            locationAnchor.innerText = locationName
+            yourLocation.innerHTML = `Searching Near ${locationName}`
         })
         .catch(
-            () => locationAnchor.innerText = "We can't find you! Marco..."
+            () => yourLocation.innerHTML = "We can't find you! Marco..."
         )
 }
 
