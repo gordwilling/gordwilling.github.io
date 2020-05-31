@@ -1,6 +1,5 @@
-const googleApiKey = "AIzaSyA4CijPSjmZuqgJCnkjHwZ2IMnuci80AwQ"
-
-export const staticMapURI = `https://maps.googleapis.com/maps/api/staticmap?key=${googleApiKey}&size=320x200`
+import {mapsApiKey} from "./geolocationApiKey.js";
+export const staticMapURI = `https://maps.googleapis.com/maps/api/staticmap?key=${mapsApiKey}&size=320x200`
 
 export function geocodingLookup(queryString) {
     const geocoder = new google.maps.Geocoder;

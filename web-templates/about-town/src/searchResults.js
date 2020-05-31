@@ -1,8 +1,8 @@
-import {geocodingReverseLookup, geocodingLookup, distanceBetween, staticMapURI} from "../../lib/geolocation.js";
-import {isBlank, isDefined, nonBlank} from "../../lib/valueSafety.js";
+import {distanceBetween, geocodingLookup, geocodingReverseLookup, staticMapURI} from "../../lib/geolocation.js";
+import {isBlank, nonBlank} from "../../lib/valueSafety.js";
 import {downloadTemplateData} from "../../lib/download.js";
 import {fillTemplateData} from "../../lib/templates.js";
-import {info} from "../../lib/logging.js";
+import {mapsApiKey} from "../../lib/geolocationApiKey.js";
 
 function showLocationElement(visibleElementId) {
     const locationLoading = document.getElementById("locationLoading")
@@ -93,28 +93,32 @@ function currentUserCoords() {
     }
 }
 
+function fetchUserDataForTemplates(data) {
+    const userCoords = currentUserCoords()
+    const distancePromises = []
+    for (const entry of data) {
+        const storeCoords = {
+            latitude: entry.latitude,
+            longitude: entry.longitude
+        }
+        entry.mapImageURL = mapImageURLFor(userCoords, storeCoords)
+        distancePromises.push(distanceBetween(userCoords, storeCoords)
+            .then(distanceInMetres => {
+                const distanceInKm = (distanceInMetres / 1000).toFixed(2)
+                entry.distance = {
+                    magnitude: distanceInKm,
+                    units: "km"
+                }
+            })
+        )
+    }
+    return distancePromises;
+}
+
 function fillSearchResultTemplates(dataReadyEvent) {
     if (dataReadyEvent.detail.dataSetName === 'searchResults') {
         const data = dataReadyEvent.detail.dataSet
-        info("adding user-specific to data to template data")
-        const userCoords = currentUserCoords()
-        const distancePromises = []
-        for (const entry of data) {
-            const storeCoords = {
-                latitude: entry.latitude,
-                longitude: entry.longitude
-            }
-            entry.mapImageURL = mapImageURLFor(userCoords, storeCoords)
-            distancePromises.push(distanceBetween(userCoords, storeCoords)
-                .then(distanceInMetres => {
-                    const distanceInKm = (distanceInMetres / 1000).toFixed(2)
-                    entry.distance = {
-                        magnitude: distanceInKm,
-                        units: "km"
-                    }
-                })
-            )
-        }
+        const distancePromises = fetchUserDataForTemplates(data);
         Promise.all(distancePromises).then(() => {
             fillTemplateData(dataReadyEvent)
         })
@@ -168,6 +172,7 @@ function load() {
     search()
 }
 
+window.mapsApiKey = mapsApiKey
 window.editLocationTerms = editLocationTerms
 window.commitEditLocationTerms = commitEditLocationTerms
 window.discardEditLocationTerms = discardEditLocationTerms

@@ -98,7 +98,7 @@ export function merge(content, data) {
  */
 function createChildFromTemplate(templateId, element, subsetDataItem) {
     const documentFragment = document.getElementById(templateId).content.cloneNode(true)
-    element.appendChild(documentFragment).element
+    element.appendChild(documentFragment)
     const childNode = element.lastElementChild
     childNode.innerHTML = merge(childNode.innerHTML, subsetDataItem)
     for (const template of childNode.querySelectorAll("[data-template]")) {
@@ -155,7 +155,6 @@ export function fillTemplateData(dataReadyEvent) {
     const affectedTemplates = document.querySelectorAll(`[data-source^='${dataReadyEvent.detail.dataSetName}']`)
     info(`Received '${dataReadyEvent.detail.dataSetName}' data`)
     info(`${affectedTemplates.length} template(s) dependent on '${dataReadyEvent.detail.dataSetName}' data. Forwarding...`)
-    info(affectedTemplates)
     for (const template of affectedTemplates) {
         const dataStore = {}
         dataStore[dataReadyEvent.detail.dataSetName] = dataReadyEvent.detail.dataSet
