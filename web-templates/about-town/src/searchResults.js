@@ -45,29 +45,12 @@ function commitEditLocationTerms() {
 
     const queryString = encodeURI(locationTermsInput.value)
     if (nonBlank(queryString)) {
-        geocodingLookup(queryString, async json => {
-
-            // locationIQ limits us to 2 requests per second :(
-            await new Promise(r => setTimeout(r, 1100))
-
-            const matches = JSON.parse(json)
-            const node = matches.filter(node => node["osm_type"] === "node").shift()
-            if (isDefined(node)) {
-                latitudeInput.value = node["lat"]
-                longitudeInput.value = node["lon"]
-                locationTermsInput.value = node["display_name"]
-                locationTermsView.value = limitLength(node["display_name"], 40)
-
-                console.log(
-                    `"latitude": "${latitudeInput.value}",
-                    "longitude": "${longitudeInput.value}"`
-                )
-
-                showLocationElement("locationLoaded")
-            } else {
-                locationTermsInput.value = "We had trouble finding that"
-                locationTermsInput.select()
-            }
+        geocodingLookup(queryString).then(location => {
+            latitudeInput.value = location.coords.latitude
+            longitudeInput.value = location.coords.longitude
+            locationTermsInput.value = location.address
+            locationTermsView.value = location.address
+            showLocationElement("locationLoaded")
         })
     }
 }
@@ -86,47 +69,27 @@ function discardEditLocationTerms() {
 }
 
 function lookupLocationName(searchCoords) {
-    geocodingReverseLookup(searchCoords.latitude, searchCoords.longitude, async json => {
-
-        // locationIQ limits us to 2 requests per second :(
-        await new Promise(r => setTimeout(r, 1100))
-
-        const details = JSON.parse(json)
-        const locationName = details["display_name"]
+    geocodingReverseLookup(
+        parseFloat(searchCoords.latitude),
+        parseFloat(searchCoords.longitude)
+    ).then(locationName => {
         const locationTermsInput = document.getElementById("locationTermsInput")
         const locationTermsView = document.getElementById("locationTermsView")
 
         locationTermsInput.value = locationName
-        locationTermsView.value = limitLength(locationName, 40)
+        locationTermsView.value = locationName
         showLocationElement("locationLoaded")
     })
 }
 
-function limitLength(displayName, limit) {
-    const terms = displayName.split(/[,\s]/).filter(nonBlank)
-    const uniqueTerms = new Set(terms)
-    let truncatedTerms = ""
-    for (let i = 0; i < terms.length; i++) {
-        if (uniqueTerms.has(terms[i])) {
-            if (truncatedTerms.length + terms[i].length < limit) {
-                truncatedTerms += terms[i] + " "
-                uniqueTerms.delete(terms[i])
-            } else {
-                break
-            }
-        }
-    }
-    return truncatedTerms.trimEnd()
-}
-
 function mapImageURLFor(userCoords, storeCoords) {
-    return `${staticMapURI}&markers=icon:small-purple-cutout|${userCoords.latitude},${userCoords.longitude}&markers=icon:small-red-cutout|${storeCoords.latitude},${storeCoords.longitude}`
+    return `${staticMapURI}&markers=size:mid|color:blue|${userCoords.latitude},${userCoords.longitude}&markers=size:mid|color:red|${storeCoords.latitude},${storeCoords.longitude}`
 }
 
 function currentUserCoords() {
     return {
-        latitude: document.getElementById("latitude").value,
-        longitude: document.getElementById("longitude").value
+        latitude: parseFloat(document.getElementById("latitude").value),
+        longitude: parseFloat(document.getElementById("longitude").value)
     }
 }
 
@@ -142,22 +105,12 @@ function fillSearchResultTemplates(dataReadyEvent) {
                 longitude: entry.longitude
             }
             entry.mapImageURL = mapImageURLFor(userCoords, storeCoords)
-            distancePromises.push(distanceBetween(userCoords, storeCoords).then(async json => {
-
-                    // locationIQ limits us to 2 requests per second :(
-                    await new Promise(r => setTimeout(r, 1100))
-
-                    const response = JSON.parse(json)
-                    if (response.code === "Ok") {
-                        const distanceInMetres = response["distances"][0][1]
-                        const distanceInKm = (distanceInMetres / 1000).toFixed(2)
-                        entry.distance = {
-                            magnitude: distanceInKm,
-                            units: "km"
-                        }
-                        return Promise.resolve()
-                    } else {
-                        return Promise.reject(json)
+            distancePromises.push(distanceBetween(userCoords, storeCoords)
+                .then(distanceInMetres => {
+                    const distanceInKm = (distanceInMetres / 1000).toFixed(2)
+                    entry.distance = {
+                        magnitude: distanceInKm,
+                        units: "km"
                     }
                 })
             )

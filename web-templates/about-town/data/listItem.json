@@ -45,8 +45,52 @@
   },
   {
     "mapImageURL": "${mapImageURL}",
-    "latitude": "43.649757",
-    "longitude":"-79.430372",
+    "latitude": "43.6800838",
+    "longitude":"-79.3900775",
+    "images": {
+      "alpha": {
+        "src": "data/media/2/pink-dress-01.webp",
+        "alt": "a red(dish) dress"
+      },
+      "b": {
+        "src": "data/media/2/outfit_1318639_1_zoom_150x.webp",
+        "alt": "a red(dish) dress"
+      },
+      "c": {
+        "src": "data/media/2/1318639_6_large_e6b4da71-d25c-49e0-a398-f936aa406b23_150x.webp",
+        "alt": "a red(dish) dress"
+      },
+      "d": {
+        "src": "data/media/2/1318639_1_zoom_150x.webp",
+        "alt": "a red(dish) dress"
+      }
+    },
+    "title": "Zolina Dress",
+    "distance": {
+      "magnitude": "${distance.magnitude}",
+      "units": "${distance.units}"
+    },
+    "store": {
+      "name": "The Narwhal",
+      "rating": {
+        "score": "4",
+        "count": "275"
+      }
+    },
+    "price": {
+      "amount": "458.50",
+      "currency": "$"
+    },
+    "availability": {
+      "inStore": "initial",
+      "delivery": "initial"
+    },
+    "description": "The Zolina dress by Isabel Marant."
+  },
+  {
+    "mapImageURL": "${mapImageURL}",
+    "latitude": "43.650006",
+    "longitude":"-79.430461",
     "images": {
       "alpha": {
         "src": "data/media/3/7E7F8296-1095-4B9C-85A8-2264AA1F6A23_2048x.jpeg",
