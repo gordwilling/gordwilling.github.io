@@ -1,8 +1,9 @@
 import {geocodingReverseLookup, geocodingLookup, distanceBetween, staticMapURI} from "../../lib/geolocation.js";
-import {isBlank, isDefined, nonBlank} from "../../lib/valueSafety.js";
+import {isBlank, nonBlank} from "../../lib/valueSafety.js";
 import {downloadTemplateData} from "../../lib/download.js";
 import {fillTemplateData} from "../../lib/templates.js";
 import {info} from "../../lib/logging.js";
+import {mapsApiKey} from "../../lib/geolocationApiKey.js";
 
 function showLocationElement(visibleElementId) {
     const locationLoading = document.getElementById("locationLoading")
@@ -168,6 +169,7 @@ function load() {
     search()
 }
 
+window.mapsApiKey = mapsApiKey
 window.editLocationTerms = editLocationTerms
 window.commitEditLocationTerms = commitEditLocationTerms
 window.discardEditLocationTerms = discardEditLocationTerms
