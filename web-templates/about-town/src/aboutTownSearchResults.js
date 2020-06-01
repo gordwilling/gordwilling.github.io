@@ -6,6 +6,30 @@ import {fetchApiKey} from "../../lib/geolocationApiKey.js";
 
 fetchApiKey().then(initMapsApi).then(() => {
 
+    function overlayImage(image) {
+        const img = document.createElement("img")
+        const div = document.getElementById("overlay")
+        if (div.innerHTML === "") {
+            const rect = image.getBoundingClientRect()
+            div.style.setProperty("position", "absolute")
+            div.style.setProperty("z-index", "1000")
+            div.style.setProperty("top", `${rect.top}px`)
+            div.style.setProperty("left", `${rect.right}px`)
+            div.appendChild(img)
+
+            img.src = image.src
+            img.height = window.innerHeight / 2
+
+            const closeOverlay = e => {
+                if (!image.contains(e.target) && !img.contains(e.target)) {
+                    div.innerHTML = ""
+                    document.removeEventListener('mousemove', closeOverlay)
+                }
+            }
+            document.addEventListener('mousemove', closeOverlay)
+        }
+    }
+
     function showAddressElement(visibleElementId) {
         const addressLoaded = document.getElementById("addressLoaded")
         const addressEditing = document.getElementById("addressEditing")
@@ -191,6 +215,7 @@ fetchApiKey().then(initMapsApi).then(() => {
         search()
     }
 
+    window.overlayImage = overlayImage
     window.editaddressInput = editaddress
     window.commitEditaddressInput = commitEditaddress
     window.discardEditaddressInput = discardEditaddress

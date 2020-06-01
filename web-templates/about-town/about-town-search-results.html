@@ -11,6 +11,7 @@
   <script src="https://kit.fontawesome.com/5a7de7dbf2.js" crossorigin="anonymous"></script>
 </head>
 <body>
+<div id="overlay"></div>
 <div class="row">
   <div>
     <a href="about-town.html"><img alt="About Town: Shop Local Online" src="images/search-results-page.png" width="256px"/></a>
@@ -81,12 +82,12 @@
 <template id="list-item-images">
   <div class="row">
     <div class="column">
-      <div><img src="${a.src}" alt="${a.alt}" height="66"/></div>
-      <div><img src="${b.src}" alt="${b.alt}" height="66"/></div>
-      <div><img src="${c.src}" alt="${c.alt}" height="66"/></div>
+      <div><img src="${a.src}" alt="${a.alt}" height="66" onclick="overlayImage(this)"/></div>
+      <div><img src="${b.src}" alt="${b.alt}" height="66" onclick="overlayImage(this)"/></div>
+      <div><img src="${c.src}" alt="${c.alt}" height="66" onclick="overlayImage(this)"/></div>
     </div>
     <div class="large">
-      <img src="${d.src}" alt="${d.alt}" height="200"/>
+      <img src="${d.src}" alt="${d.alt}" height="200" onclick="overlayImage(this)"/>
     </div>
   </div>
 </template>
