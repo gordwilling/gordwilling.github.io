@@ -1,4 +1,4 @@
-import {distanceBetween, geocodingReverseLookup, initMapsApi, staticMapURI} from "../../lib/geolocation.js";
+import {directionsURI, distanceBetween, geocodingReverseLookup, initMapsApi, mapURI} from "../../lib/geolocation.js";
 import {isBlank, isDefined, nonBlank} from "../../lib/valueSafety.js";
 import {downloadTemplateData} from "../../lib/download.js";
 import {fillTemplateData} from "../../lib/templates.js";
@@ -75,7 +75,7 @@ fetchApiKey().then(initMapsApi).then(() => {
     }
 
     function mapImageURLFor(userCoords, storeCoords) {
-        return `${staticMapURI()}&markers=size:mid|color:blue|${userCoords.latitude},${userCoords.longitude}&markers=size:mid|color:red|${storeCoords.latitude},${storeCoords.longitude}`
+        return `${mapURI()}&markers=size:mid|color:blue|${userCoords.latitude},${userCoords.longitude}&markers=size:mid|color:red|${storeCoords.latitude},${storeCoords.longitude}`
     }
 
     function currentUserCoords() {
@@ -103,6 +103,7 @@ fetchApiKey().then(initMapsApi).then(() => {
                     }
                 })
             )
+            entry.directionsURL = directionsURI(userCoords, storeCoords)
         }
         return distancePromises;
     }

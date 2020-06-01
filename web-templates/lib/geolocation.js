@@ -4,15 +4,19 @@ export function initMapsApi(key) {
     script.async = true
     script.defer = true
     document.head.append(script)
-    staticMapURI = initStaticMapURI(key)
+    mapURI = initMapURI(key)
 }
 
-const initStaticMapURI = key => () => {
+const initMapURI = key => () => {
     return `https://maps.googleapis.com/maps/api/staticmap?key=${key}&size=200x200`
 }
 
-export function staticMapURI() {
+export function mapURI() {
     return "invoke initMapsApi with a valid key first"
+}
+
+export function directionsURI(originCoords, destinationCoords) {
+    return `https://www.google.com/maps/dir/?api=1&origin=${originCoords.latitude},${originCoords.longitude}&destination=${destinationCoords.latitude},${destinationCoords.longitude}`
 }
 
 /**

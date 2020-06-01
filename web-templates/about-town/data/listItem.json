@@ -1,6 +1,7 @@
 [
   {
     "mapImageURL": "${mapImageURL}",
+    "directionsURL": "${directionsURL}",
     "latitude": "43.6552136",
     "longitude": "-79.4042604",
     "images": {
@@ -45,6 +46,7 @@
   },
   {
     "mapImageURL": "${mapImageURL}",
+    "directionsURL": "${directionsURL}",
     "latitude": "43.6800838",
     "longitude":"-79.3900775",
     "images": {
@@ -89,6 +91,7 @@
   },
   {
     "mapImageURL": "${mapImageURL}",
+    "directionsURL": "${directionsURL}",
     "latitude": "43.650006",
     "longitude":"-79.430461",
     "images": {

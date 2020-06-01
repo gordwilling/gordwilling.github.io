@@ -20,7 +20,7 @@
       <label for="searchTermsInput">
         <input type="text" id="searchTermsInput" name="searchTermsInput" size="52" autofocus/>
       </label>
-      <button onclick="search()"><span class="fas fa-search"></span> Shop Local</button>
+      <button class="shop-local" onclick="search()"><span class="fas fa-search"></span> Shop Local</button>
       <input type="hidden" id="latitude" value=""/>
       <input type="hidden" id="longitude" value=""/>
     </div>
@@ -57,7 +57,7 @@
       <div class="column">
         <div class="store">
           <div class="name">
-            <a href="">${store.name}</a>
+            <a target="_blank" href="${directionsURL}">${store.name}</a>
           </div>
           <div class="rating" data-template="rating" data-source="store.rating"></div>
         </div>
