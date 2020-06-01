@@ -147,6 +147,7 @@ fetchApiKey().then(initMapsApi).then(() => {
         document.getElementById("latitude").value = userCoords.latitude
         document.getElementById("longitude").value = userCoords.longitude
         document.getElementById("addressView").value = address
+        document.getElementById("addressInput").value = address
 
         if (isBlank(userCoords.latitude) || isBlank(userCoords.longitude)) {
             showAddressElement("addressInput")
