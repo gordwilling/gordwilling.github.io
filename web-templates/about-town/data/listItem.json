@@ -4,7 +4,7 @@
     "latitude": "43.6552136",
     "longitude": "-79.4042604",
     "images": {
-      "alpha": {
+      "a": {
         "src": "data/media/1/red-dress-01.jpg",
         "alt": "a red dress"
       },
@@ -48,7 +48,7 @@
     "latitude": "43.6800838",
     "longitude":"-79.3900775",
     "images": {
-      "alpha": {
+      "a": {
         "src": "data/media/2/pink-dress-01.webp",
         "alt": "a red(dish) dress"
       },
@@ -92,7 +92,7 @@
     "latitude": "43.650006",
     "longitude":"-79.430461",
     "images": {
-      "alpha": {
+      "a": {
         "src": "data/media/3/7E7F8296-1095-4B9C-85A8-2264AA1F6A23_2048x.jpeg",
         "alt": "a red(dish) dress"
       },
