@@ -10,26 +10,25 @@
   <script type="module" src="src/aboutTown.js"></script>
   <script src="https://kit.fontawesome.com/5a7de7dbf2.js" crossorigin="anonymous"></script>
 </head>
-<body class="landing-page">
+<body>
 <form action="about-town-search-results.html" method="get">
-  <div class="landing-search-form">
-    <div class="landing-search-fields">
+  <div class="columns">
+    <div>
+      <img src="images/front-page-background.png" width="512" alt="About Town: Search Local Shops"/>
+    </div>
+    <div class="rows">
       <div>
         <label for="searchTerms"></label>
-        <input type="text" id="searchTerms" name="searchTerms" size="48" autofocus/>
+        <input type="text" id="searchTerms" name="searchTerms" size="60" autofocus/>
+        <div id="near" class="fine-print"></div>
       </div>
-      <div id="your-location" class="landing-search-location">
-        <span class="fas fa-spin fa-circle-notch"></span>
-        Asking for your location...
-      </div>
-    </div>
-    <div>
       <div>
         <button type="submit"><span class="fas fa-search"></span> Search Local Shops</button>
       </div>
+      <input type="hidden" id="latitude" name="latitude" value=""/>
+      <input type="hidden" id="longitude" name="longitude" value=""/>
+      <input type="hidden" id="address" name="address" value=""/>
     </div>
-    <input type="hidden" id="latitude" name="latitude" value=""/>
-    <input type="hidden" id="longitude" name="longitude" value=""/>
   </div>
 </form>
 

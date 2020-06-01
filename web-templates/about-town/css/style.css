@@ -3,32 +3,23 @@ body {
     font-size: smaller;
 }
 
-body.landing-page {
-    background: url("../images/front-page-background.png") no-repeat top center fixed;
-    background-size: 1024px;
-}
-
-div.landing-search-form {
-    display: flex;
-    flex-direction: row;
-    width:fit-content;
-    margin-left:auto;
-    margin-right:auto;
-    margin-top:470px
-
-}
-
-div.landing-search-fields {
+div.columns {
     display: flex;
     flex-direction: column;
+    align-items: center;
 }
 
-div.landing-search-location {
-    width:fit-content;
-    font-size:x-small;
-    margin-left:auto;
-    margin-right:auto;
-    padding-top: -8px;
+div.rows {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+}
+
+div.fine-print {
+    font-size: smaller;
+    align-self: flex-start;
+    padding-left: 8px;
+    margin-left: 8px;
 }
 
 div.banner {
@@ -153,14 +144,9 @@ span.stop {
     color: red
 }
 
-.landing-search {
-    white-space: nowrap;
-    margin-top: 420px;
-}
-
 input[type=text] {
     padding: 8px;
-    margin: 8px 8px 2px 8px;
+    margin: 8px;
     box-sizing: border-box;
     border: 1px solid lightgray;
     border-radius: 16px;
@@ -175,9 +161,8 @@ input[type=range] {
 }
 
 button {
-    padding: 8px 8px;
-    margin: 8px 0;
-    box-sizing: border-box;
+    padding: 8px;
+    margin:8px;
     border: lightgray;
     border-radius: 14px;
     cursor: pointer;

@@ -34,19 +34,16 @@
         km of&nbsp;
       </div>
       <div class="location">
-        <div id="locationLoading">
-          <span class="fas fa-spin fa-circle-notch"></span>
-        </div>
-        <div id="locationLoaded" style="display:none">
-          <a href="javascript:editLocationTerms()">
-            <output id="locationTermsView" name="locationTermsView" for="locationTerms"></output>
+        <div id="addressLoaded" style="display:none">
+          <a href="javascript:editaddressInput()">
+            <output id="addressView" name="addressView" for="addressInput"></output>
           </a>
         </div>
-        <div id="locationEditing" style="display:none">
-          <label for="locationTermsInput">
-            <input type="text" id="locationTermsInput" name="locationTerms" size="30" value="">
-            <button type="button" id="locationTermsDiscard" name="locationTermsDiscard"
-                    onclick="discardEditLocationTerms()">
+        <div id="addressEditing" style="display:none">
+          <label for="addressInput">
+            <input type="text" id="addressInput" name="addressInput" size="30" value="">
+            <button type="button" id="addressInputDiscard" name="addressInputDiscard"
+                    onclick="discardEditaddressInput()">
               <span class="fas fa-times-circle stop"></span>
             </button>
           </label>

@@ -6,77 +6,71 @@ import {fetchApiKey} from "../../lib/geolocationApiKey.js";
 
 fetchApiKey().then(initMapsApi).then(() => {
 
-    function showLocationElement(visibleElementId) {
-        const locationLoading = document.getElementById("locationLoading")
-        const locationLoaded = document.getElementById("locationLoaded")
-        const locationEditing = document.getElementById("locationEditing")
+    function showAddressElement(visibleElementId) {
+        const addressLoaded = document.getElementById("addressLoaded")
+        const addressEditing = document.getElementById("addressEditing")
 
         switch (visibleElementId) {
-            case "locationLoading":
-                locationLoading.style.removeProperty("display")
-                locationLoaded.style.display = "none"
-                locationEditing.style.display = "none"
+            case "addressLoaded":
+                addressLoaded.style.removeProperty("display")
+                addressEditing.style.display = "none"
                 break;
-            case "locationLoaded":
-                locationLoading.style.display = "none"
-                locationLoaded.style.removeProperty("display")
-                locationEditing.style.display = "none"
-                break;
-            case "locationInput":
-                locationLoading.style.display = "none"
-                locationLoaded.style.display = "none"
-                locationEditing.style.removeProperty("display")
+            case "addressInput":
+                addressLoaded.style.display = "none"
+                addressEditing.style.removeProperty("display")
                 break;
             default:
                 throw "Unhandled case in switch"
         }
     }
 
-    function editLocationTerms() {
-        const locationTermsInput = document.getElementById("locationTermsInput")
-        showLocationElement("locationInput")
-        locationTermsInput.value = ""
-        locationTermsInput.focus()
+    function editaddressInput() {
+        const addressInput = document.getElementById("addressInput")
+        showAddressElement("addressInput")
+        addressInput.value = ""
+        addressInput.focus()
     }
 
-    function commitEditLocationTerms(place) {
-        const locationTermsInput = document.getElementById("locationTermsInput")
-        const locationTermsView = document.getElementById("locationTermsView")
+    function commitEditaddressInput(place) {
+        const addressInput = document.getElementById("addressInput")
+        const addressView = document.getElementById("addressView")
         const latitudeInput = document.getElementById("latitude")
         const longitudeInput = document.getElementById("longitude")
 
+        console.log(place)
         if (isDefined(place)) {
             latitudeInput.value = place["geometry"].location.lat()
             longitudeInput.value = place["geometry"].location.lng()
-            locationTermsInput.value = place["formatted_address"]
-            locationTermsView.value = place["formatted_address"]
-            showLocationElement("locationLoaded")
+            addressInput.value = place["formatted_address"]
+            addressView.value = place["formatted_address"]
+            showAddressElement("addressLoaded")
         }
     }
 
-    function discardEditLocationTerms() {
-        const locationTermsInput = document.getElementById("locationTermsInput")
+    function discardEditaddressInput() {
+        console.log("what happened")
+        const addressInput = document.getElementById("addressInput")
         const latitudeInput = document.getElementById("latitude")
         const longitudeInput = document.getElementById("longitude")
         if (nonBlank(latitudeInput.value) && nonBlank(longitudeInput.value)) {
-            showLocationElement("locationLoaded")
+            showAddressElement("addressLoaded")
         } else {
-            locationTermsInput.value = "Help us Help you..."
-            locationTermsInput.select()
+            addressInput.value = "Help us Help you..."
+            addressInput.select()
         }
     }
 
-    function lookupLocationName(searchCoords) {
+    function lookupAddress(searchCoords) {
         geocodingReverseLookup(
             parseFloat(searchCoords.latitude),
             parseFloat(searchCoords.longitude)
-        ).then(locationName => {
-            const locationTermsInput = document.getElementById("locationTermsInput")
-            const locationTermsView = document.getElementById("locationTermsView")
+        ).then(address => {
+            const addressInput = document.getElementById("addressInput")
+            const addressView = document.getElementById("addressView")
 
-            locationTermsInput.value = locationName
-            locationTermsView.value = locationName
-            showLocationElement("locationLoaded")
+            addressInput.value = address
+            addressView.value = address
+            showAddressElement("addressLoaded")
         })
     }
 
@@ -126,7 +120,7 @@ fetchApiKey().then(initMapsApi).then(() => {
     function search() {
         const userCoords = currentUserCoords()
         if (isBlank(userCoords.latitude) || isBlank(userCoords.longitude)) {
-            showLocationElement("locationInput")
+            showAddressElement("addressInput")
         } else {
             const dataLocations = {
                 searchResults: "./data/listItem.json"
@@ -140,6 +134,7 @@ fetchApiKey().then(initMapsApi).then(() => {
     function load() {
         const requestParams = new URL(location.href).searchParams
         const searchTerms = requestParams.get("searchTerms")
+        const address = requestParams.get("address")
         const userCoords = {
             latitude: requestParams.get("latitude"),
             longitude: requestParams.get("longitude")
@@ -148,24 +143,23 @@ fetchApiKey().then(initMapsApi).then(() => {
         document.getElementById("searchTermsInput").value = searchTerms
         document.getElementById("latitude").value = userCoords.latitude
         document.getElementById("longitude").value = userCoords.longitude
+        document.getElementById("addressView").value = address
 
         if (isBlank(userCoords.latitude) || isBlank(userCoords.longitude)) {
-            showLocationElement("locationInput")
-        } else if (userCoords.latitude && userCoords.longitude) {
-            showLocationElement("locationLoading");
-            lookupLocationName(userCoords);
+            showAddressElement("addressInput")
+        } else if (isBlank(address)) {
+            lookupAddress(userCoords);
+        } else {
+            showAddressElement("addressLoaded")
         }
 
-        const locationTermsInput = document.getElementById("locationTermsInput")
-        locationTermsInput.addEventListener("keydown", (e) => {
+        const addressInput = document.getElementById("addressInput")
+        addressInput.addEventListener("keydown", (e) => {
             if (e.code === "Enter") {
-                commitEditLocationTerms()
+                commitEditaddressInput()
             } else if (e.code === "Escape") {
-                discardEditLocationTerms()
+                discardEditaddressInput()
             }
-        })
-        locationTermsInput.addEventListener("focusout", () => {
-            discardEditLocationTerms()
         })
 
         const currentLocation = new google.maps.LatLng(
@@ -178,16 +172,17 @@ fetchApiKey().then(initMapsApi).then(() => {
             types: ["geocode"],
             fields: ["formatted_address", "geometry.location"]
         }
-        const autocomplete = new google.maps.places.Autocomplete(locationTermsInput, options)
+        const autocomplete = new google.maps.places.Autocomplete(addressInput, options)
         autocomplete.addListener('place_changed', () => {
-            commitEditLocationTerms(autocomplete.getPlace())
+            console.log("place changed")
+            commitEditaddressInput(autocomplete.getPlace())
         })
         search()
     }
 
-    window.editLocationTerms = editLocationTerms
-    window.commitEditLocationTerms = commitEditLocationTerms
-    window.discardEditLocationTerms = discardEditLocationTerms
+    window.editaddressInput = editaddressInput
+    window.commitEditaddressInput = commitEditaddressInput
+    window.discardEditaddressInput = discardEditaddressInput
     window.search = search
     window.onload = load
 })

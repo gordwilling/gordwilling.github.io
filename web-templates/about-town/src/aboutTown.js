@@ -1,8 +1,9 @@
 import {currentPosition, initMapsApi, geocodingReverseLookup} from "../../lib/geolocation.js";
 import {fetchApiKey} from "../../lib/geolocationApiKey.js";
+import {info} from "../../lib/logging.js";
 
 function initLocation() {
-    const yourLocation = document.getElementById("your-location")
+    const near = document.getElementById("near")
 
     fetchApiKey()
         .then(initMapsApi)
@@ -12,12 +13,11 @@ function initLocation() {
             document.getElementById("longitude").value = coords.longitude
             return geocodingReverseLookup(coords.latitude, coords.longitude)
         })
-        .then(locationName => {
-            yourLocation.innerHTML = `Searching Near ${locationName}`
+        .then(address => {
+            document.getElementById("address").value = address
+            near.innerHTML = `Near ${address}`
         })
-        .catch(
-            () => yourLocation.innerHTML = "We can't find you! Marco..."
-        )
+        .catch(info)
 }
 
 window.onload = initLocation
