@@ -156,13 +156,9 @@ input[type=text]:focus {
     outline: 0;
 }
 
-input[type=range] {
-    width: 6em;
-}
-
 button {
     padding: 8px;
-    margin:8px;
+
     border: lightgray;
     border-radius: 14px;
     cursor: pointer;

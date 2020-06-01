@@ -9,6 +9,7 @@ fetchApiKey().then(initMapsApi).then(() => {
     function showAddressElement(visibleElementId) {
         const addressLoaded = document.getElementById("addressLoaded")
         const addressEditing = document.getElementById("addressEditing")
+        const addressInput = document.getElementById("addressInput")
 
         switch (visibleElementId) {
             case "addressLoaded":
@@ -18,37 +19,36 @@ fetchApiKey().then(initMapsApi).then(() => {
             case "addressInput":
                 addressLoaded.style.display = "none"
                 addressEditing.style.removeProperty("display")
+                addressInput.select()
+                addressInput.focus()
                 break;
             default:
                 throw "Unhandled case in switch"
         }
     }
 
-    function editaddressInput() {
-        const addressInput = document.getElementById("addressInput")
+    function editaddress() {
         showAddressElement("addressInput")
-        addressInput.value = ""
-        addressInput.focus()
     }
 
-    function commitEditaddressInput(place) {
+    function commitEditaddress(place) {
         const addressInput = document.getElementById("addressInput")
         const addressView = document.getElementById("addressView")
         const latitudeInput = document.getElementById("latitude")
         const longitudeInput = document.getElementById("longitude")
+        const searchTermsInput = document.getElementById("searchTermsInput")
 
-        console.log(place)
         if (isDefined(place)) {
             latitudeInput.value = place["geometry"].location.lat()
             longitudeInput.value = place["geometry"].location.lng()
             addressInput.value = place["formatted_address"]
             addressView.value = place["formatted_address"]
             showAddressElement("addressLoaded")
+            searchTermsInput.focus()
         }
     }
 
-    function discardEditaddressInput() {
-        console.log("what happened")
+    function discardEditaddress() {
         const addressInput = document.getElementById("addressInput")
         const latitudeInput = document.getElementById("latitude")
         const longitudeInput = document.getElementById("longitude")
@@ -112,6 +112,9 @@ fetchApiKey().then(initMapsApi).then(() => {
             const data = dataReadyEvent.detail.dataSet
             const distancePromises = fetchUserDataForTemplates(data);
             Promise.all(distancePromises).then(() => {
+                data.sort((x, y) => {
+                    return x.distance.magnitude - y.distance.magnitude
+                })
                 fillTemplateData(dataReadyEvent)
             })
         }
@@ -153,12 +156,19 @@ fetchApiKey().then(initMapsApi).then(() => {
             showAddressElement("addressLoaded")
         }
 
+        const searchTermsInput = document.getElementById("searchTermsInput")
+        searchTermsInput.addEventListener("keydown", (e) => {
+            if (e.code === "Enter") {
+                search()
+            }
+        })
+
         const addressInput = document.getElementById("addressInput")
         addressInput.addEventListener("keydown", (e) => {
             if (e.code === "Enter") {
-                commitEditaddressInput()
+                commitEditaddress()
             } else if (e.code === "Escape") {
-                discardEditaddressInput()
+                discardEditaddress()
             }
         })
 
@@ -174,15 +184,14 @@ fetchApiKey().then(initMapsApi).then(() => {
         }
         const autocomplete = new google.maps.places.Autocomplete(addressInput, options)
         autocomplete.addListener('place_changed', () => {
-            console.log("place changed")
-            commitEditaddressInput(autocomplete.getPlace())
+            commitEditaddress(autocomplete.getPlace())
         })
         search()
     }
 
-    window.editaddressInput = editaddressInput
-    window.commitEditaddressInput = commitEditaddressInput
-    window.discardEditaddressInput = discardEditaddressInput
+    window.editaddressInput = editaddress
+    window.commitEditaddressInput = commitEditaddress
+    window.discardEditaddressInput = discardEditaddress
     window.search = search
     window.onload = load
 })

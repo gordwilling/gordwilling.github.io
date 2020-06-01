@@ -13,25 +13,20 @@
 <body>
 <div class="banner">
   <div class="branding-small">
-    <a href="about-town.html"><img alt="About Town: Search Local Shops" src="images/search-results-page.png" width="256px"/></a>
+    <a href="about-town.html"><img alt="About Town: Shop Local Online" src="images/search-results-page.png" width="256px"/></a>
   </div>
   <div class="search_criteria">
     <div class="search-terms">
       <label for="searchTermsInput">
         <input type="text" id="searchTermsInput" name="searchTermsInput" size="60" autofocus/>
       </label>
-      <button onclick="search()"><span class="fas fa-search"></span> Search Local Shops</button>
+      <button onclick="search()"><span class="fas fa-search"></span> Shop Local</button>
       <input type="hidden" id="latitude" value=""/>
       <input type="hidden" id="longitude" value=""/>
     </div>
     <div class="search-refine">
       <div class="radius">
-        <label for="radius"></label>
-        <input type="range" id="radius" name="radius" min="1" step="1" max="50" value="5"
-               oninput="radiusDisplay.value=radius.value"/>
-        within
-        <output id="radiusDisplay" name="radiusDisplay" for="radius">5</output>
-        km of&nbsp;
+        Near&nbsp;
       </div>
       <div class="location">
         <div id="addressLoaded" style="display:none">
