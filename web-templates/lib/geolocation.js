@@ -8,7 +8,7 @@ export function initMapsApi(key) {
 }
 
 const initStaticMapURI = key => () => {
-    return `https://maps.googleapis.com/maps/api/staticmap?key=${key}&size=320x200`
+    return `https://maps.googleapis.com/maps/api/staticmap?key=${key}&size=200x200`
 }
 
 export function staticMapURI() {

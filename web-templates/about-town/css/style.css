@@ -8,17 +8,17 @@ div.column {
     flex-direction: column;
 }
 
+div.row {
+    display: flex;
+    flex-direction: row;
+}
+
 div.center {
     align-items: center;
 }
 
 div.end {
     justify-content: flex-end;
-}
-
-div.row {
-    display: flex;
-    flex-direction: row;
 }
 
 div.room-to-grow {
@@ -42,6 +42,10 @@ div.list-item-info {
 div.list-item-info .heading {
     font-size: large;
     justify-content: space-between;
+}
+
+div.map {
+    margin: 0 0 8px 8px;
 }
 
 div.store {
@@ -109,7 +113,7 @@ input[type=text]:focus {
 
 button {
     padding: 8px;
-    margin: 8px 8px 0 0;
+    margin: 8px 8px 0 8px;
     border: lightgray;
     border-radius: 14px;
     cursor: pointer;
