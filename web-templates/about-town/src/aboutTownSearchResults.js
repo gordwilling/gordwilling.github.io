@@ -9,25 +9,20 @@ fetchApiKey().then(initMapsApi).then(() => {
     function overlayImage(image) {
         const img = document.createElement("img")
         const div = document.getElementById("overlay")
-        if (div.innerHTML === "") {
-            const rect = image.getBoundingClientRect()
-            div.style.setProperty("position", "absolute")
-            div.style.setProperty("z-index", "1000")
-            div.style.setProperty("top", `${rect.top}px`)
-            div.style.setProperty("left", `${rect.right}px`)
-            div.appendChild(img)
-
-            img.src = image.src
-            img.height = window.innerHeight / 2
-
-            const closeOverlay = e => {
-                if (!image.contains(e.target) && !img.contains(e.target)) {
-                    div.innerHTML = ""
-                    document.removeEventListener('mousemove', closeOverlay)
-                }
-            }
-            document.addEventListener('mousemove', closeOverlay)
+        if (div.innerHTML !== "") {
+            div.innerHTML = ""
         }
+
+        div.style.setProperty("position", "absolute")
+        div.style.setProperty("z-index", "1000")
+        div.style.setProperty("left", "200px")
+        div.appendChild(img)
+
+        img.src = image.src
+        img.height = window.innerHeight / 2
+
+        const closeOverlay = () => div.innerHTML = ""
+        document.addEventListener('click', closeOverlay,{capture: true})
     }
 
     function showAddressElement(visibleElementId) {
