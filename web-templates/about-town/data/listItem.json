@@ -51,19 +51,19 @@
     "longitude":"-79.3900775",
     "images": {
       "a": {
-        "src": "data/media/2/pink-dress-01.webp",
+        "src": "data/media/2/zolina-one.png",
         "alt": "a red(dish) dress"
       },
       "b": {
-        "src": "data/media/2/outfit_1318639_1_zoom_150x.webp",
+        "src": "data/media/2/zolina-two.png",
         "alt": "a red(dish) dress"
       },
       "c": {
-        "src": "data/media/2/1318639_6_large_e6b4da71-d25c-49e0-a398-f936aa406b23_150x.webp",
+        "src": "data/media/2/zolina-three.png",
         "alt": "a red(dish) dress"
       },
       "d": {
-        "src": "data/media/2/1318639_1_zoom_150x.webp",
+        "src": "data/media/2/zolina-one.png",
         "alt": "a red(dish) dress"
       }
     },
