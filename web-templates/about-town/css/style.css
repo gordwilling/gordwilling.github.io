@@ -1,6 +1,67 @@
+* {
+    margin: 0;
+    padding: 0
+}
+
 body {
     font-family: FontAwesome, sans-serif;
     font-size: smaller;
+    background-color:white;
+}
+
+div.banner-large {
+    box-shadow: 0 1px 2px lightgray;
+    padding-bottom: 8px;
+    margin-bottom: 8px
+
+}
+
+div.logo {
+    background-image: url("../images/search-results-page.png");
+    background-repeat: no-repeat;
+    width: 256px;
+    height: 137px;
+    background-size: contain;
+}
+
+div.banner-large .address-display {
+    margin: 8px 0 8px 8px;
+    padding: 8px 0 8px 8px
+}
+
+div.banner-small {
+    display: none;
+    background-color:white;
+    width: 100%;
+    padding: 8px;
+    box-shadow: 0 1px 2px lightgray;
+}
+
+div.banner-small .logo {
+    background-image: url("../images/name-only.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 196px;
+    height: 37px;
+}
+
+div.banner-small .address-display {
+    font-size: smaller;
+    margin: 4px 0 0 8px;
+    padding: 0 0 0 8px;
+}
+
+div.banner-small .address-display a {
+    text-decoration: none;
+    color: inherit;
+}
+
+div.banner-small .search-terms input {
+    margin: 0 8px 0 8px
+}
+
+div.banner-small .search-terms button {
+    margin: 0
 }
 
 div.column {
@@ -17,13 +78,12 @@ div.center {
     align-items: center;
 }
 
-div.end {
-    justify-content: flex-end;
+div.start {
+    justify-content: flex-start;
 }
 
-div.room-to-grow {
-    padding: 8px 0 4px 8px;
-    margin: 8px 0 4px 8px;
+div.end {
+    justify-content: flex-end;
 }
 
 div.fine-print {
@@ -107,6 +167,10 @@ input[type=text] {
     border-radius: 16px;
 }
 
+input[type=text]:hover {
+    box-shadow: 0 0 4px lightgray;
+}
+
 input[type=text]:focus {
     outline: 0;
 }
@@ -119,9 +183,15 @@ button {
     cursor: pointer;
 }
 
-.shop-local {
+button:hover {
+    box-shadow: 0 0 4px lightgray;
+}
+
+button.shop-local {
     padding: 8px 16px 8px 16px;
 }
+
+
 
 button:focus {
     outline: 0;

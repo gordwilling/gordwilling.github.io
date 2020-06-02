@@ -11,11 +11,13 @@
   <script src="https://kit.fontawesome.com/5a7de7dbf2.js" crossorigin="anonymous"></script>
 </head>
 <body>
-<div class="row">
+<div id="banner" class="row start banner-large">
   <div>
-    <a href="about-town.html"><img alt="About Town: Shop Local Online" src="images/search-results-page.png" width="256px"/></a>
+    <a href="about-town.html">
+      <div class="logo"></div>
+    </a>
   </div>
-  <div class="column end">
+  <div class="column end search-terms">
     <div>
       <label for="searchTermsInput">
         <input type="text" id="searchTermsInput" name="searchTermsInput" size="52" autofocus/>
@@ -25,8 +27,8 @@
       <input type="hidden" id="longitude" value=""/>
     </div>
     <div class="row">
-      <div class="room-to-grow">Near</div>
-      <div class="room-to-grow" id="addressLoaded" style="display:none">
+      <div class="address-display">Near</div>
+      <div class="address-display" id="addressLoaded" style="display:none">
         <a href="javascript:editaddressInput()">
           <output id="addressView" name="addressView" for="addressInput"></output>
         </a>
@@ -43,9 +45,8 @@
     </div>
   </div>
 </div>
-<hr/>
-<div id="overlay"></div>
-<div class="column" data-template="list-item" data-source="searchResults"></div>
+<div class=overlay id="overlay"></div>
+<div class="column search-results" data-template="list-item" data-source="searchResults"></div>
 </body>
 <template id="list-item">
   <div class="row">
