@@ -13,7 +13,8 @@ fetchApiKey().then(initMapsApi).then(() => {
             div.innerHTML = ""
         }
 
-        div.style.setProperty("position", "absolute")
+        div.style.setProperty("position", "fixed")
+        div.style.setProperty("top", `${image.getBoundingClientRect().top} px`)
         div.style.setProperty("z-index", "1000")
         div.style.setProperty("left", "200px")
         div.appendChild(img)
@@ -23,6 +24,7 @@ fetchApiKey().then(initMapsApi).then(() => {
 
         const closeOverlay = () => div.innerHTML = ""
         document.addEventListener('click', closeOverlay, {capture: true})
+        document.addEventListener('scroll', closeOverlay)
     }
 
     function selectBanner(event) {
