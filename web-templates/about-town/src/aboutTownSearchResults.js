@@ -1,4 +1,4 @@
-import {directionsURI, distanceBetween, geocodingReverseLookup, initMapsApi, mapURI} from "../../lib/geolocation.js";
+import {directionsURI, distanceBetween, geocodingReverseLookup, initMapsApi, mapURI} from "../../lib/mockGeolocation.js";
 import {isBlank, isDefined, nonBlank} from "../../lib/valueSafety.js";
 import {downloadTemplateData} from "../../lib/download.js";
 import {fillTemplateData} from "../../lib/templates.js";

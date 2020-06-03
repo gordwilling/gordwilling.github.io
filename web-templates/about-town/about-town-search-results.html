@@ -18,11 +18,14 @@
     </a>
   </div>
   <div class="column end search-terms">
-    <div>
-      <label for="searchTermsInput">
-        <input type="text" id="searchTermsInput" name="searchTermsInput" size="52" autofocus/>
-      </label>
-      <button class="shop-local" onclick="search()"><span class="fas fa-search"></span> Shop Local</button>
+    <div class="row serach-terms">
+      <label for="searchTermsInput"></label>
+      <div>
+        <input type="text" id="searchTermsInput" name="searchTermsInput" class="shop-local" size="52" autofocus/>
+      </div>
+      <div>
+        <button class="shop-local" onclick="search()"><span class="fas fa-search"></span></button>
+      </div>
       <input type="hidden" id="latitude" value=""/>
       <input type="hidden" id="longitude" value=""/>
     </div>

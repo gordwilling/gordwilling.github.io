@@ -57,7 +57,7 @@ div.banner-small .address-display a {
 }
 
 div.banner-small .search-terms input {
-    margin: 0 8px 0 8px
+    margin: 0 0 0 8px
 }
 
 div.banner-small .search-terms button {
@@ -168,11 +168,17 @@ input[type=text] {
 }
 
 input[type=text]:hover {
-    box-shadow: 0 0 4px lightgray;
+    box-shadow: 0 0 8px lightgray;
 }
 
 input[type=text]:focus {
     outline: 0;
+}
+
+input[type=text].shop-local {
+    margin: 8px 0 8px 8px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
 }
 
 button {
@@ -184,11 +190,16 @@ button {
 }
 
 button:hover {
-    box-shadow: 0 0 4px lightgray;
+    box-shadow: 0 0 8px lightgray;
 }
 
 button.shop-local {
-    padding: 8px 16px 8px 16px;
+    padding: 8px 16px 8px 8px;
+    margin: 8px 8px 8px 0;
+    border: 1px solid lightgray;
+    border-left: 0;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
 }
 
 
