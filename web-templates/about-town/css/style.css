@@ -1,6 +1,10 @@
 * {
     margin: 0;
-    padding: 0
+    padding: 0;
+}
+
+html, body {
+    height: auto
 }
 
 body {
@@ -9,19 +13,25 @@ body {
     background-color:white;
 }
 
-div.banner-large {
-    box-shadow: 0 1px 2px lightgray;
-    padding-bottom: 8px;
-    margin-bottom: 8px
+div.landing-logo {
+    margin-top: 2em;
+}
 
+div.banner-large {
+    background-color: white;
+    box-shadow: 0 1px 2px lightgray;
+    margin-top: 0;
+    margin-bottom: 8px;
+    width: 100%;
 }
 
 div.logo {
     background-image: url("../images/search-results-page.png");
     background-repeat: no-repeat;
-    width: 256px;
-    height: 137px;
     background-size: contain;
+    padding-bottom: 16px;
+    width:256px;
+    height:134px;
 }
 
 div.banner-large .address-display {
@@ -30,19 +40,22 @@ div.banner-large .address-display {
 }
 
 div.banner-small {
-    display: none;
-    background-color:white;
+    background-color: white;
     width: 100%;
-    padding: 8px;
-    box-shadow: 0 1px 2px lightgray;
+    position: fixed;
+    box-shadow: 0 1px 8px lightgray;
+    top: 0;
+    margin-top: 0;
+    margin-bottom: 8px;
 }
 
 div.banner-small .logo {
-    background-image: url("../images/name-only.png");
+    background-image: url("../images/name-only-stumpy.png");
     background-repeat: no-repeat;
     background-size: contain;
-    width: 196px;
-    height: 37px;
+    padding-bottom: 16px;
+    width:256px;
+    height:51px;
 }
 
 div.banner-small .address-display {
@@ -54,6 +67,8 @@ div.banner-small .address-display {
 div.banner-small .address-display a {
     text-decoration: none;
     color: inherit;
+    cursor: default;
+    pointer-events: none;
 }
 
 div.banner-small .search-terms input {
@@ -202,7 +217,9 @@ button.shop-local {
     border-bottom-left-radius: 0;
 }
 
-
+button.small {
+    padding: 8px 12px 8px 8px;
+}
 
 button:focus {
     outline: 0;

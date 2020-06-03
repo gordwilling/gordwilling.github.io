@@ -1,4 +1,4 @@
-import {directionsURI, distanceBetween, geocodingReverseLookup, initMapsApi, mapURI} from "../../lib/mockGeolocation.js";
+import {directionsURI, distanceBetween, geocodingReverseLookup, initMapsApi, mapURI} from "../../lib/geolocation.js";
 import {isBlank, isDefined, nonBlank} from "../../lib/valueSafety.js";
 import {downloadTemplateData} from "../../lib/download.js";
 import {fillTemplateData} from "../../lib/templates.js";
@@ -22,11 +22,39 @@ fetchApiKey().then(initMapsApi).then(() => {
         img.height = window.innerHeight / 2
 
         const closeOverlay = () => div.innerHTML = ""
-        document.addEventListener('click', closeOverlay,{capture: true})
+        document.addEventListener('click', closeOverlay, {capture: true})
     }
 
-    function setBannerStyle() {
+    function selectBanner(event) {
+        const banner = document.getElementById("banner")
+        const searchResults = document.getElementById("search-results")
 
+        if (event.type === 'scroll') {
+            let bannerClass = banner.classList.contains('banner-large')
+                ? 'banner-large'
+                : 'banner-small'
+
+            const largeBannerHeight = 150
+            const smallBannerHeight = 67
+
+            if (window.scrollY <= largeBannerHeight) {
+                if (bannerClass === "banner-small") {
+                    banner.classList.remove("banner-small")
+                    banner.classList.add("banner-large")
+                    banner.style.setProperty("top", "0")
+                    searchResults.style.setProperty("margin-top", "0")
+                }
+            } else if (largeBannerHeight < window.scrollY < largeBannerHeight + smallBannerHeight) {
+                if (bannerClass === "banner-large") {
+                    banner.classList.remove("banner-large")
+                    banner.classList.add("banner-small")
+                    banner.style.setProperty("top", `-${smallBannerHeight}px`)
+                    searchResults.style.setProperty("margin-top", `${window.scrollY}px`)
+                }
+                const bannerTop = Math.min(0, window.scrollY - largeBannerHeight - smallBannerHeight)
+                banner.style.setProperty("top", `${bannerTop}px`)
+            }
+        }
     }
 
     function showAddressElement(visibleElementId) {
@@ -212,8 +240,10 @@ fetchApiKey().then(initMapsApi).then(() => {
             commitEditaddress(autocomplete.getPlace())
         })
         search()
+
     }
 
+    window.onscroll = selectBanner
     window.overlayImage = overlayImage
     window.editaddressInput = editaddress
     window.commitEditaddressInput = commitEditaddress

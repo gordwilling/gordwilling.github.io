@@ -12,7 +12,7 @@
 </head>
 <body>
 <div id="banner" class="row start banner-large">
-  <div>
+  <div class>
     <a href="about-town.html">
       <div class="logo"></div>
     </a>
@@ -24,7 +24,7 @@
         <input type="text" id="searchTermsInput" name="searchTermsInput" class="shop-local" size="52" autofocus/>
       </div>
       <div>
-        <button class="shop-local" onclick="search()"><span class="fas fa-search"></span></button>
+        <button class="shop-local small" onclick="search()"><span class="fas fa-search"></span></button>
       </div>
       <input type="hidden" id="latitude" value=""/>
       <input type="hidden" id="longitude" value=""/>
@@ -32,18 +32,20 @@
     <div class="row">
       <div class="address-display">Near</div>
       <div class="address-display" id="addressLoaded" style="display:none">
-        <a href="javascript:editaddressInput()">
+        <a id="addressEditLink" href="javascript:editaddressInput()">
           <output id="addressView" name="addressView" for="addressInput"></output>
         </a>
       </div>
       <div id="addressEditing" style="display:none">
+        <div class="row">
         <label for="addressInput">
-          <input type="text" id="addressInput" name="addressInput" size="30" value="">
-          <button type="button" id="addressInputDiscard" name="addressInputDiscard"
-                  onclick="discardEditaddressInput()">
-            <span class="fas fa-times-circle stop"></span>
-          </button>
+          <input type="text" class="shop-local" id="addressInput" name="addressInput" size="30" value="">
         </label>
+        <button type="button" id="addressInputDiscard" name="addressInputDiscard" class="shop-local small"
+                onclick="discardEditaddressInput()">
+          <span class="fas fa-times-circle stop"></span>
+        </button>
+        </div>
       </div>
     </div>
   </div>
