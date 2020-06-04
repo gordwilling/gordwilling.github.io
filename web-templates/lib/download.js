@@ -2,7 +2,7 @@ import {error, info} from "./logging.js";
 import {rootOf, templateDataReadyEvent} from "./templates.js";
 import {notDefined} from "./valueSafety.js";
 
-function verifyStatus(response) {
+export function verifyStatus(response) {
     if (response.status >= 200 && response.status < 300) {
         return Promise.resolve(response)
     } else {
@@ -34,14 +34,14 @@ function removeSpinner(element, spinnerClass = 'fa-spin') {
     }
 }
 
-function dispatchDataReadyEvent(htmlElement, dataSetName) {
+export function dispatchDataReadyEvent(htmlElement, dataSetName) {
     return dataSet => {
         info(`dispatching 'DataReadyEvent' with '${dataSetName}'`)
         htmlElement.dispatchEvent(templateDataReadyEvent(dataSet, dataSetName))
     }
 }
 
-async function readResponse(response) {
+export async function readResponse(response) {
     // simulate network latency with random waits
     // await new Promise(r => setTimeout(r, Math.floor(Math.random() * 5000)))
     return response.json()
@@ -60,6 +60,9 @@ export function downloadTemplateData(dataLocations, onTemplateDataReady) {
                 .then(readResponse)
                 .then(dispatchDataReadyEvent(document.body, dataSetName))
                 .catch(error)
+        } else {
+            console.log(`'${dataSetName}' found locally. Using cached value...`)
+            dispatchDataReadyEvent(document.body, dataSetName)
         }
     }
 }

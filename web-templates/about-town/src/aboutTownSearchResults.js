@@ -1,27 +1,39 @@
-import {directionsURI, distanceBetween, geocodingReverseLookup, initMapsApi, mapURI} from "../../lib/mockGeolocation.js";
-import {isBlank, isDefined, nonBlank} from "../../lib/valueSafety.js";
-import {downloadTemplateData} from "../../lib/download.js";
-import {fillTemplateData} from "../../lib/templates.js";
+import {directionsURI, distanceBetween, geocodingReverseLookup, initMapsApi, mapURI} from "../../lib/geolocation.js";
+import {isBlank, isDefined, nonBlank, notDefined} from "../../lib/valueSafety.js";
+import {readResponse, verifyStatus} from "../../lib/download.js";
 import {fetchApiKey} from "../../lib/geolocationApiKey.js";
 import {createRow} from "./bikesOnWheelsTemplate.js";
 
 fetchApiKey().then(initMapsApi).then(() => {
 
-    function overlayImage(image) {
+    let searchData = undefined
+
+    class SearchResultsReadyEvent extends CustomEvent {
+        constructor(dataSet) {
+            super('search-results-ready', {
+                detail: {
+                    dataSet: dataSet
+                }
+            });
+        }
+    }
+
+    function overlayImage(image, idOfOverlayTarget) {
         const img = document.createElement("img")
+        const overlayTarget = document.getElementById(idOfOverlayTarget)
         const div = document.getElementById("overlay")
         if (div.innerHTML !== "") {
             div.innerHTML = ""
         }
 
         div.style.setProperty("position", "fixed")
-        div.style.setProperty("top", `${image.getBoundingClientRect().top} px`)
+        div.style.setProperty("top", `${overlayTarget.getBoundingClientRect().top}px`)
+        div.style.setProperty("left", `${overlayTarget.getBoundingClientRect().left}px`)
         div.style.setProperty("z-index", "1000")
-        div.style.setProperty("left", "200px")
         div.appendChild(img)
 
         img.src = image.src
-        img.height = window.innerHeight / 2
+        img.height = overlayTarget.height
 
         const closeOverlay = () => div.innerHTML = ""
         document.addEventListener('click', closeOverlay, {capture: true})
@@ -144,39 +156,62 @@ fetchApiKey().then(initMapsApi).then(() => {
         const distancePromises = []
         for (const entry of data) {
             const storeCoords = {
-                latitude: entry.latitude,
-                longitude: entry.longitude
+                latitude: entry.store.latitude,
+                longitude: entry.store.longitude
             }
-            entry.mapImageURL = mapImageURLFor(userCoords, storeCoords)
+            entry.store.mapImageURL = mapImageURLFor(userCoords, storeCoords)
             distancePromises.push(distanceBetween(userCoords, storeCoords)
                 .then(distanceInMetres => {
                     const distanceInKm = (distanceInMetres / 1000).toFixed(2)
-                    entry.distance = {
+                    entry.store.distance = {
                         magnitude: distanceInKm,
                         units: "km"
                     }
                 })
             )
-            entry.directionsURL = directionsURI(userCoords, storeCoords)
+            entry.store.directionsURL = directionsURI(userCoords, storeCoords)
         }
         return distancePromises;
     }
 
-    function fillSearchResultTemplates(dataReadyEvent) {
-        if (dataReadyEvent.detail.dataSetName === 'searchResults') {
-            const data = dataReadyEvent.detail.dataSet
-            const distancePromises = fetchUserDataForTemplates(data);
-            Promise.all(distancePromises).then(() => {
-                data.sort((x, y) => {
-                    return x.distance.magnitude - y.distance.magnitude
+    function showSearchResults(searchResultsReadyEvent) {
+        if (searchResultsReadyEvent.detail.dataSet) {
+            searchData = searchResultsReadyEvent
+            const data = searchResultsReadyEvent.detail.dataSet
+            const searchTerms = document.getElementById("searchTermsInput").value
+            const keywords = searchTerms.toLowerCase().split(/[\s\-]/)
+            if (nonBlank(searchTerms)) {
+                const filteredData = data.filter(record => {
+                    return keywords
+                        .map(keyword => {
+                            if (record.title.toLowerCase().includes(keyword)) {
+                                return true
+                            }
+                            if (record.description.toLowerCase().includes(keyword)) {
+                                return true
+                            }
+                            for (const spec of record.specs) {
+                                if (spec.toLowerCase().includes(keyword)) {
+                                    return true
+                                }
+                            }
+                            return false
+                        })
+                        .reduce((x, y) => x && y)
                 })
-                const searchResultsDiv = document.getElementById("search-results")
-                searchResultsDiv.innerHTML = ""
-                for (const row of data) {
-                    console.log(row)
-                    searchResultsDiv.innerHTML += createRow(row)
-                }
-            })
+
+                const distancePromises = fetchUserDataForTemplates(filteredData);
+                Promise.all(distancePromises).then(() => {
+                    filteredData.sort((x, y) => {
+                        const distanceDiff = x.store.distance.magnitude - y.store.distance.magnitude
+                    })
+                    const searchResultsDiv = document.getElementById("search-results")
+                    searchResultsDiv.innerHTML = ""
+                    for (const row of filteredData) {
+                        searchResultsDiv.innerHTML += createRow(row)
+                    }
+                })
+            }
         }
     }
 
@@ -185,10 +220,22 @@ fetchApiKey().then(initMapsApi).then(() => {
         if (isBlank(userCoords.latitude) || isBlank(userCoords.longitude)) {
             showAddressElement("addressInput")
         } else {
-            const dataLocations = {
-                searchResults: "./data/media/bikesOnWheels/bikesOnWheels.json"
+            document.body.addEventListener('search-results-ready', showSearchResults)
+            if (notDefined(searchData)) {
+                const dataLocations = {
+                    searchResults: "./data/media/bikesOnWheels/bikesOnWheels.json"
+                }
+                fetch(dataLocations.searchResults, {mode: "same-origin"})
+                    .then(verifyStatus)
+                    .then(readResponse)
+                    .then(data => document.body.dispatchEvent(new SearchResultsReadyEvent(data)))
+                    .catch(console.log)
             }
-            downloadTemplateData(dataLocations, fillSearchResultTemplates)
+            else {
+                document.body.dispatchEvent(new SearchResultsReadyEvent(searchData.detail.dataSet))
+            }
+
+
         }
     }
 
