@@ -79,6 +79,11 @@ div.banner-small .search-terms button {
     margin: 0
 }
 
+.search-terms {
+    margin-left: 32px;
+}
+
+
 div.column {
     display: flex;
     flex-direction: column;
@@ -162,6 +167,14 @@ div.purchase-details .sizes {
     padding-top: 1em;
 }
 
+div.purchase-details .variants {
+    padding-top: 1em;
+}
+
+div.purchase-details .availability {
+    padding-top: 1em;
+}
+
 div.purchase-details ul {
     padding-left: 1em
 }
@@ -201,8 +214,8 @@ input[type=text].shop-local {
 }
 
 select {
-    padding: 8px;
-    margin: 8px
+    padding: 8px 8px 8px 0;
+    margin: 8px 8px 8px 0
 }
 
 button {

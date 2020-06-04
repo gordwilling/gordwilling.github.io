@@ -43,7 +43,7 @@ export const createRow = r => {
       <div class="row purchase-details">
         <div class="column">
           <div class="price">${r.price.amount}</div>
-          <div>
+          <div class="availability">
             Availability
             <ul>
             `
