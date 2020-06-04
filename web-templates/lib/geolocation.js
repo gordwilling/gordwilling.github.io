@@ -82,7 +82,6 @@ export function geocodingReverseLookup(lat, lon) {
 }
 
 export function distanceBetween(coordsA, coordsB) {
-    console.log([coordsA, coordsB])
     const origin = new google.maps.LatLng(coordsA.latitude, coordsA.longitude);
     const destination = new google.maps.LatLng(coordsB.latitude, coordsB.longitude);
     const service = new google.maps.DistanceMatrixService();
