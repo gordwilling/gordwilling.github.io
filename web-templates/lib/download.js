@@ -47,25 +47,21 @@ async function readResponse(response) {
     return response.json()
 }
 
-export function downloadTemplateData(templateRefs, dataLocations, onTemplateDataReady) {
+export function downloadTemplateData(dataLocations, onTemplateDataReady) {
     document.body.addEventListener('template-data-ready', onTemplateDataReady)
     const dataStatus = {}
     const downloadStatus = {}
-    templateRefs.forEach(node => {
-        const dataSource = node.getAttribute("data-source")
-        const dataSetName = rootOf(dataSource)
+    for (const [dataSetName, dataSource] of Object.entries(dataLocations)) {
         if (notDefined(dataStatus[dataSetName]) && notDefined(downloadStatus[dataSetName])) {
             info(`'${dataSetName}' not found locally. Downloading...`)
             downloadStatus[dataSetName] = true
-            fetch(dataLocations[dataSetName], {mode: "same-origin"})
-                .then(tee(addSpinner(node)))
+            fetch(dataSource, {mode: "same-origin"})
                 .then(verifyStatus)
                 .then(readResponse)
                 .then(dispatchDataReadyEvent(document.body, dataSetName))
-                .then(tee(removeSpinner(node)))
                 .catch(error)
         }
-    })
+    }
 }
 
 

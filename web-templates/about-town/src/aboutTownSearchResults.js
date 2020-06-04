@@ -1,8 +1,9 @@
-import {directionsURI, distanceBetween, geocodingReverseLookup, initMapsApi, mapURI} from "../../lib/geolocation.js";
+import {directionsURI, distanceBetween, geocodingReverseLookup, initMapsApi, mapURI} from "../../lib/mockGeolocation.js";
 import {isBlank, isDefined, nonBlank} from "../../lib/valueSafety.js";
 import {downloadTemplateData} from "../../lib/download.js";
 import {fillTemplateData} from "../../lib/templates.js";
 import {fetchApiKey} from "../../lib/geolocationApiKey.js";
+import {createRow} from "./bikesOnWheelsTemplate.js";
 
 fetchApiKey().then(initMapsApi).then(() => {
 
@@ -169,7 +170,12 @@ fetchApiKey().then(initMapsApi).then(() => {
                 data.sort((x, y) => {
                     return x.distance.magnitude - y.distance.magnitude
                 })
-                fillTemplateData(dataReadyEvent)
+                const searchResultsDiv = document.getElementById("search-results")
+                searchResultsDiv.innerHTML = ""
+                for (const row of data) {
+                    console.log(row)
+                    searchResultsDiv.innerHTML += createRow(row)
+                }
             })
         }
     }
@@ -180,11 +186,9 @@ fetchApiKey().then(initMapsApi).then(() => {
             showAddressElement("addressInput")
         } else {
             const dataLocations = {
-                searchResults: "./data/listItem.json"
+                searchResults: "./data/media/bikesOnWheels/bikesOnWheels.json"
             }
-            const searchResultDiv = document.querySelector("[data-template]")
-            searchResultDiv.innerHTML = ""
-            downloadTemplateData([searchResultDiv], dataLocations, fillSearchResultTemplates)
+            downloadTemplateData(dataLocations, fillSearchResultTemplates)
         }
     }
 

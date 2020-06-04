@@ -38,78 +38,18 @@
       </div>
       <div id="addressEditing" style="display:none">
         <div class="row">
-        <label for="addressInput">
-          <input type="text" class="shop-local" id="addressInput" name="addressInput" size="30" value="">
-        </label>
-        <button type="button" id="addressInputDiscard" name="addressInputDiscard" class="shop-local small"
-                onclick="discardEditaddressInput()">
-          <span class="fas fa-times-circle stop"></span>
-        </button>
+          <label for="addressInput">
+            <input type="text" class="shop-local" id="addressInput" name="addressInput" size="30" value="">
+          </label>
+          <button type="button" id="addressInputDiscard" name="addressInputDiscard" class="shop-local small"
+                  onclick="discardEditaddressInput()">
+            <span class="fas fa-times-circle stop"></span>
+          </button>
         </div>
       </div>
     </div>
   </div>
 </div>
-<div class="overlay" id="overlay"></div>
-<div id="search-results" class="column search-results" data-template="list-item" data-source="searchResults"></div>
+<div id="search-results" class="column search-results"></div>
 </body>
-<template id="list-item">
-  <div class="row list-item">
-    <div class="row" data-template="list-item-images" data-source="images"></div>
-    <div class="column list-item-info">
-      <div class="row heading">
-        <div class="title">${title}</div>
-        <div class="distance">${distance.magnitude}${distance.units}</div>
-      </div>
-      <div class="column">
-        <div class="store">
-          <div class="name">
-            <a target="_blank" href="${directionsURL}">${store.name}</a>
-          </div>
-          <div class="rating" data-template="rating" data-source="store.rating"></div>
-        </div>
-        <div class="row purchase-details">
-          <div class="price">${price.currency}${price.amount}</div>
-          <div>Available
-            <ul>
-              <li class="${availability.inStore}">In Store</li>
-              <li class="${availability.delivery}">Delivery</li>
-            </ul>
-          </div>
-          <div class="features">${description}</div>
-        </div>
-      </div>
-    </div>
-    <div class="map">
-      <a target="_blank" href="${directionsURL}"><img src="${mapImageURL}" crossorigin="anonymous" alt="map of [${latitude},${longitude}]"/></a>
-    </div>
-  </div>
-</template>
-<template id="list-item-images">
-  <div class="row">
-    <div class="column">
-      <div><img src="${a.src}" alt="${a.alt}" height="66" onclick="overlayImage(this)"/></div>
-      <div><img src="${b.src}" alt="${b.alt}" height="66" onclick="overlayImage(this)"/></div>
-      <div><img src="${c.src}" alt="${c.alt}" height="66" onclick="overlayImage(this)"/></div>
-    </div>
-    <div class="large">
-      <img src="${d.src}" alt="${d.alt}" height="200" onclick="overlayImage(this)"/>
-    </div>
-  </div>
-</template>
-<template id="rating">
-  <div class="rating">
-    <span class="fas fa-star filled"></span>
-    <span class="fas fa-star filled"></span>
-    <span class="fas fa-star filled"></span>
-    <span class="fas fa-star filled"></span>
-    <span class="fal fa-star"></span>
-    <span class="rating-count"> <a href="">${count} store ratings</a></span>
-  </div>
-</template>
-<template id="spinner">
-  <div>
-    <span class="fas fa-spin fa-circle-notch"></span>
-  </div>
-</template>
 </html>
