@@ -234,8 +234,6 @@ fetchApiKey().then(initMapsApi).then(() => {
             else {
                 document.body.dispatchEvent(new SearchResultsReadyEvent(searchData.detail.dataSet))
             }
-
-
         }
     }
 
