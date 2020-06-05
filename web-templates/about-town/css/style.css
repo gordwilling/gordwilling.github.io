@@ -171,6 +171,9 @@ div.purchase-details .price {
 
 div.purchase-details .features {
     padding-left: 1em;
+    height:300px;
+    flex-grow: 1;
+    overflow-y:auto;
 }
 
 div.purchase-details .sizes {

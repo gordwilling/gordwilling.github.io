@@ -10,12 +10,12 @@ export const createRow = r => {
         const uuid = UUID.next()
         for (const image of r.images) {
             s += `
-      <div><img src="${image.localPath}" alt="${image.alt}" height="66" onclick="overlayImage(this, '${uuid}')"></div>`
+      <div><img src="${image.localPath}" alt="${image.alt}" height="50" onclick="overlayImage(this, '${uuid}')"></div>`
         }
         s += `
     </div>
     <div>
-      <div><img id="${uuid}" src="${r.images[0].localPath}" alt="${r.images[0].alt}" height="400"></div>
+      <div><img id="${uuid}" src="${r.images[0].localPath}" alt="${r.images[0].alt}" height="300"></div>
     </div>
   </div>`
     }
@@ -94,9 +94,11 @@ export const createRow = r => {
     }
     s += `            
       </div>
-      <div class="map">
+<!--     
+        <div class="map">
         <a target="_blank" href="${r.store.directionsURL}"><img src="${r.store.mapImageURL}" crossorigin="anonymous" alt="map of [${r.store.latitude},${r.store.longitude}]"/></a>
       </div>
+-->      
     </div>    
   </div>
 </div>`
