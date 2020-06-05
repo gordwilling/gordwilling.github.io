@@ -1,4 +1,4 @@
-import {directionsURI, distanceBetween, geocodingReverseLookup, initMapsApi, mapURI} from "../../lib/mockGeolocation.js";
+import {directionsURI, distanceBetween, geocodingReverseLookup, initMapsApi, mapURI} from "../../lib/geolocation.js";
 import {isBlank, isDefined, nonBlank, notDefined} from "../../lib/valueSafety.js";
 import {readResponse, verifyStatus} from "../../lib/download.js";
 import {fetchApiKey} from "../../lib/geolocationApiKey.js";
@@ -203,7 +203,7 @@ fetchApiKey().then(initMapsApi).then(() => {
                 const distancePromises = fetchUserDataForTemplates(filteredData);
                 Promise.all(distancePromises).then(() => {
                     filteredData.sort((x, y) => {
-                        const distanceDiff = x.store.distance.magnitude - y.store.distance.magnitude
+                        return x.store.distance.magnitude - y.store.distance.magnitude
                     })
                     const searchResultsDiv = document.getElementById("search-results")
                     searchResultsDiv.innerHTML = ""

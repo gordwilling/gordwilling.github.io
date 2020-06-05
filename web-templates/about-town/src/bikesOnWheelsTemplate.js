@@ -10,12 +10,12 @@ export const createRow = r => {
         const uuid = UUID.next()
         for (const image of r.images) {
             s += `
-      <div><img src="${image.localPath}" alt="${image.alt}" height="50" onclick="overlayImage(this, '${uuid}')"></div>`
+      <div class="img-preview"><img src="${image.localPath}" alt="${image.alt}" height="50" onclick="overlayImage(this, '${uuid}')"></div>`
         }
         s += `
     </div>
     <div>
-      <div><img id="${uuid}" src="${r.images[0].localPath}" alt="${r.images[0].alt}" height="300"></div>
+      <div class="img-main"><img id="${uuid}" src="${r.images[0].localPath}" alt="${r.images[0].alt}" height="300"></div>
     </div>
   </div>`
     }
@@ -28,7 +28,7 @@ export const createRow = r => {
     <div class="column">
       <div class="row store">
         <div class="name">
-          <a target="_blank" href="${r.directionsURL}">${r.store.name}</a>
+          <a target="_blank" href="${r.store.directionsURL}">${r.store.name}</a>
         </div>
         <div class="rating" data-template="rating" data-source="store.rating">${r.store.rating.score}
         `

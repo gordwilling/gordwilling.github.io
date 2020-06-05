@@ -7821,5 +7821,63 @@
     "Availability": {
       "InStock": "true"
     }
+  },
+  {
+    "store" : {
+      "name" : "Cycle Solutions",
+      "rating" : {
+        "score" : 3.8,
+        "count" : 144
+      },
+      "website" : "https://parliament.cycle-solutions.com",
+      "latitude" : "43.6633118",
+      "longitude" : "-79.368025"
+    },
+    "url" : "https://parliament.cycle-solutions.com/specialized-centro-mips-helmet.html",
+    "title" : "SPECIALIZED Specialized Centro Mips Helmet",
+    "description" : "<p>Desirable features, certified protection, and casual styling—these are the hallmarks of the Centro helmet. It's intended for commuters and city riders, and it features an easy-to-use, one-size fit system, an in-molded shell for lightweight protection, and all around reflective webbing to help increase your visibility to motorists in low-light conditions. You'll also find that it's equipped with next-level protection courtesy of revolutionary MIPS technology (Multi-Directional Impact Protection System).</p><p>Fit system is ANGi crash sensor ready.</p><p>MIPS-equipped.</p><p></p><p>One-size system, designed for easy and accurate fit to a wide range of head sizes.</p><p>Headset SX fit system with micro-adjustable dial for easy, secure, and accurate fit.</p><p>4th Dimension Cooling System optimizes ventilation.</p><p>In-molded shell improves strength and reduces weight.</p><p>Tri-Fix web splitter for improved comfort and ease of strap adjustments.</p><p>All around reflective webbing and decals for increased visibility to motorists in low-light conditions.</p><p>Patented clip-on visor included.</p><p>Lock compatible rear vent accepts both cable and U-locks to deter theft.</p>",
+    "specs" : [
+    ],
+    "price" : {
+      "amount" : "89.99",
+      "currency" : "CAD"
+    },
+    "variants" : [
+      "Matte Black",
+      "Gloss Red",
+      "Ion",
+      "Matte Storm Grey"
+    ],
+    "images" : [
+      {
+        "src" : "https://cdn.shoplightspeed.com/shops/622502/files/11800595/1600x2048x2/specialized-specialized-centro-mips-helmet.jpg",
+        "alt" : "SPECIALIZED Specialized Centro Mips Helmet",
+        "localPath" : "data/media/cycle-solutions/4094f715fd84cf76e11da916e6b7c510.jpg"
+      },
+      {
+        "src" : "https://cdn.shoplightspeed.com/shops/622502/files/11800539/1600x2048x2/specialized-specialized-centro-mips-helmet.jpg",
+        "alt" : "SPECIALIZED Specialized Centro Mips Helmet",
+        "localPath" : "data/media/cycle-solutions/1e53b4f2912caf12fbcce56646fd2ac3.jpg"
+      },
+      {
+        "src" : "https://cdn.shoplightspeed.com/shops/622502/files/11800597/1600x2048x2/specialized-specialized-centro-mips-helmet.jpg",
+        "alt" : "SPECIALIZED Specialized Centro Mips Helmet",
+        "localPath" : "data/media/cycle-solutions/55f95173fd2df1de8911f31ca9de8fe4.jpg"
+      },
+      {
+        "src" : "https://cdn.shoplightspeed.com/shops/622502/files/12270267/1600x2048x2/specialized-specialized-centro-mips-helmet.jpg",
+        "alt" : "SPECIALIZED Specialized Centro Mips Helmet",
+        "localPath" : "data/media/cycle-solutions/f256225edb4b29a49dcf54566b81bed2.jpg"
+      },
+      {
+        "src" : "https://cdn.shoplightspeed.com/shops/622502/files/12557766/1600x2048x2/specialized-specialized-centro-mips-helmet.jpg",
+        "alt" : "SPECIALIZED Specialized Centro Mips Helmet",
+        "localPath" : "data/media/cycle-solutions/c145684f38face370e5ad5319000e3ff.jpg"
+      }
+    ],
+    "Availability" : {
+      "https://schema.org/InStock" : "true"
+    },
+    "inventory" : "4"
   }
 ]

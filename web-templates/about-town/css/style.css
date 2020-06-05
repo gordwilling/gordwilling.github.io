@@ -118,6 +118,17 @@ div.fine-print {
     margin-left: 8px;
 }
 
+div.img-preview {
+    margin: 2px 2px 2px 0;
+    padding: 2px 2px 2px 0;
+    box-shadow: 0 1px 4px lightgray;
+}
+
+div.img-main {
+    margin: 2px;
+    padding: 2px;
+}
+
 div.list-item {
     margin: 4px 8px 4px 8px;
     padding: 4px 8px 4px 8px;
@@ -126,7 +137,7 @@ div.list-item {
 
 div.list-item-info {
     padding-left: 1em;
-    flex-grow: 1
+    flex-grow: 1;
 }
 
 div.list-item-info .heading {
@@ -175,7 +186,7 @@ div.purchase-details .price {
 
 div.purchase-details .features {
     padding-left: 1em;
-    height:300px;
+    height:310px;
     flex-grow: 1;
     overflow-y:auto;
 }
