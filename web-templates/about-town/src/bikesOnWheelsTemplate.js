@@ -26,7 +26,7 @@ export const createRow = r => {
       <div class="distance">${r.store.distance.magnitude}${r.store.distance.units}</div>
     </div>
     <div class="column">
-      <div class="store">
+      <div class="row store">
         <div class="name">
           <a target="_blank" href="${r.directionsURL}">${r.store.name}</a>
         </div>
@@ -38,6 +38,9 @@ export const createRow = r => {
     }
     s += `
           <span class="rating-count"><a href="">${r.store.rating.count} store ratings</a></span>
+        </div>
+        <div class="directions">
+          <a target="_blank" href="${r.store.directionsURL}">Directions</a>
         </div>
       </div>
       <div class="row purchase-details">
@@ -94,11 +97,6 @@ export const createRow = r => {
     }
     s += `            
       </div>
-<!--     
-        <div class="map">
-        <a target="_blank" href="${r.store.directionsURL}"><img src="${r.store.mapImageURL}" crossorigin="anonymous" alt="map of [${r.store.latitude},${r.store.longitude}]"/></a>
-      </div>
--->      
     </div>    
   </div>
 </div>`

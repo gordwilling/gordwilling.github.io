@@ -106,6 +106,10 @@ div.end {
     justify-content: flex-end;
 }
 
+div.directions {
+    margin-left:auto;
+}
+
 div.fine-print {
     font-size: smaller;
     align-self: flex-start;
