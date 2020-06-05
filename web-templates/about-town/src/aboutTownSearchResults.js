@@ -223,7 +223,7 @@ fetchApiKey().then(initMapsApi).then(() => {
             document.body.addEventListener('search-results-ready', showSearchResults)
             if (notDefined(searchData)) {
                 const dataLocations = {
-                    searchResults: "./data/media/bikesOnWheels/bikesOnWheels.json"
+                    searchResults: "./data/media/bow/bikesOnWheels.json"
                 }
                 fetch(dataLocations.searchResults, {mode: "same-origin"})
                     .then(verifyStatus)

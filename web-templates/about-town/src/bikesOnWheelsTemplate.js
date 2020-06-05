@@ -2,7 +2,7 @@ import {UUID} from "../../lib/uuid.js";
 
 export const createRow = r => {
     let s = `
-<div class="row">
+<div class="row list-item">
   <div class="row">
     <div class="column">
       `

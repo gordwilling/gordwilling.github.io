@@ -114,6 +114,12 @@ div.fine-print {
     margin-left: 8px;
 }
 
+div.list-item {
+    margin: 4px 8px 4px 8px;
+    padding: 4px 8px 4px 8px;
+    box-shadow: 0 1px 4px lightgray;
+}
+
 div.list-item-info {
     padding-left: 1em;
     flex-grow: 1
@@ -146,6 +152,10 @@ div.store .rating .filled {
 
 div.store .rating-count {
     padding-left: 1em;
+}
+
+div.overlay {
+    background-color: white;
 }
 
 div.purchase-details {
