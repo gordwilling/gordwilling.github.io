@@ -1,4 +1,5 @@
 import {UUID} from "../../lib/uuid.js";
+import {nonBlank} from "../../lib/valueSafety.js";
 
 export const createRow = r => {
     let s = `
@@ -50,20 +51,25 @@ export const createRow = r => {
       </div>
       <div class="row purchase-details">
         <div class="column">
-          <div class="price">${r.price.amount}</div>
-          <div class="availability">
+          <div class="price">${r.price.amount}</div>`
+
+    const availability = Object.entries(r.Availability).filter(([key, _]) => nonBlank(key))
+    if (availability.length !== 0) {
+        s +=
+            `<div class="availability">
             Availability
             <ul>
             `
-    for (const [key, value] of Object.entries(r.Availability)) {
-        s += `
+        for (const [key, value] of Object.entries(r.Availability)) {
+            s += `
               <li${value === "true" ? "" : " class='unavailable'"}>${key}</li>`
-    }
-    s += `              
+        }
+        s += `              
             </ul>
-          </div>
-          `
-    if (r.variants) {
+          </div>`
+    }
+
+    if (r.variants.length !== 0) {
         s += `      
           <div class="variants">
             Options<br/>
