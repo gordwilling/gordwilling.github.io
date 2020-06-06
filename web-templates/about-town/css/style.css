@@ -14,7 +14,8 @@ body {
 }
 
 div.landing-logo {
-    margin-top: 2em;
+    margin-top: 6em;
+    margin-bottom: 2em;
 }
 
 div.banner-large {
@@ -26,12 +27,12 @@ div.banner-large {
 }
 
 div.logo {
-    background-image: url("../images/search-results-page.png");
+    background-image: url("../images/shopabout256x133.png");
     background-repeat: no-repeat;
     background-size: contain;
-    padding-bottom: 16px;
+    padding-bottom: 8px;
     width:256px;
-    height:134px;
+    height:133px;
 }
 
 div.banner-large .address-display {
@@ -45,17 +46,16 @@ div.banner-small {
     position: fixed;
     box-shadow: 0 1px 8px lightgray;
     top: 0;
-    margin-top: 0;
     margin-bottom: 8px;
 }
 
 div.banner-small .logo {
-    background-image: url("../images/name-only-stumpy.png");
+    background-image: url("../images/shopabout256x48.png");
     background-repeat: no-repeat;
     background-size: contain;
-    padding-bottom: 16px;
+    padding-bottom: 8px;
     width:256px;
-    height:51px;
+    height:48px;
 }
 
 div.banner-small .address-display {
