@@ -57,7 +57,7 @@ export const createRow = r => {
             `
     for (const [key, value] of Object.entries(r.Availability)) {
         s += `
-              <li${value ? "" : " class='unavailable'"}>${key}</li>`
+              <li${value === "true" ? "" : " class='unavailable'"}>${key}</li>`
     }
     s += `              
             </ul>
