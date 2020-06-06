@@ -2,7 +2,7 @@ import {directionsURI, distanceBetween, geocodingReverseLookup, initMapsApi, map
 import {isBlank, isDefined, nonBlank, notDefined} from "../../lib/valueSafety.js";
 import {readResponse, verifyStatus} from "../../lib/download.js";
 import {fetchApiKey} from "../../lib/geolocationApiKey.js";
-import {createRow} from "./bikesOnWheelsTemplate.js";
+import {createRow} from "./shopifyTemplate.js";
 
 fetchApiKey().then(initMapsApi).then(() => {
 
@@ -223,7 +223,7 @@ fetchApiKey().then(initMapsApi).then(() => {
             document.body.addEventListener('search-results-ready', showSearchResults)
             if (notDefined(searchData)) {
                 const dataLocations = {
-                    searchResults: "./data/media/bow/bikesOnWheels.json"
+                    searchResults: "./data/media/catalog.json"
                 }
                 fetch(dataLocations.searchResults, {mode: "same-origin"})
                     .then(verifyStatus)
