@@ -151,28 +151,59 @@ fetchApiKey().then(initMapsApi).then(() => {
         }
     }
 
+    function uniqueIdFor(store) {
+        const storeCoords = {
+            latitude: store.latitude,
+            longitude: store.longitude
+        }
+        return JSON.stringify(storeCoords)
+    }
+
+    function uniqueStoresIn(data) {
+        const uniqueStores = new Map()
+        for (const entry of data) {
+            uniqueStores.set(uniqueIdFor(entry.store), entry.store)
+        }
+        return uniqueStores
+    }
+
     function fetchUserDataForTemplates(data) {
         const userCoords = currentUserCoords()
-        const distancePromises = []
-        for (const entry of data) {
-            const storeCoords = {
-                latitude: entry.store.latitude,
-                longitude: entry.store.longitude
-            }
-            entry.store.mapImageURL = mapImageURLFor(userCoords, storeCoords)
-            distancePromises.push(distanceBetween(userCoords, storeCoords)
+        const uniqueStoresMap = uniqueStoresIn(data)
+        const storeDistancePromises = []
+        const storeDistanceMap = new Map()
+
+        for (const storeCoords of uniqueStoresMap.keys()) {
+            storeDistancePromises.push(distanceBetween(userCoords, JSON.parse(storeCoords))
                 .then(distanceInMetres => {
                     const distanceInKm = (distanceInMetres / 1000).toFixed(2)
-                    entry.store.distance = {
+                    storeDistanceMap.set(storeCoords, {
                         magnitude: distanceInKm,
                         units: "km"
-                    }
+                    })
+                })
+                .catch(_ => {
+                    storeDistanceMap.set(storeCoords, {
+                        magnitude: "?",
+                        units: "km"
+                    })
                 })
             )
-            entry.store.directionsURL = directionsURI(userCoords, storeCoords)
         }
-        return distancePromises;
+        return Promise.all(storeDistancePromises)
+            .then(() => {
+                for (const entry of data) {
+                    const storeCoords = {
+                        latitude: entry.store.latitude,
+                        longitude: entry.store.longitude
+                    }
+                    entry.store.mapImageURL = mapImageURLFor(userCoords, storeCoords)
+                    entry.store.directionsURL = directionsURI(userCoords, storeCoords)
+                    entry.store.distance = storeDistanceMap.get(uniqueIdFor(entry.store))
+                }
+            })
     }
+
 
     function showSearchResults(searchResultsReadyEvent) {
         if (searchResultsReadyEvent.detail.dataSet) {
@@ -199,18 +230,18 @@ fetchApiKey().then(initMapsApi).then(() => {
                         })
                         .reduce((x, y) => x && y)
                 })
-
-                const distancePromises = fetchUserDataForTemplates(filteredData);
-                Promise.all(distancePromises).then(() => {
-                    filteredData.sort((x, y) => {
-                        return x.store.distance.magnitude - y.store.distance.magnitude
-                    })
-                    const searchResultsDiv = document.getElementById("search-results")
-                    searchResultsDiv.innerHTML = ""
-                    for (const row of filteredData) {
-                        searchResultsDiv.innerHTML += createRow(row)
-                    }
-                })
+                fetchUserDataForTemplates(filteredData)
+                    .then(() => {
+                            filteredData.sort((x, y) => {
+                                return x.store.distance.magnitude - y.store.distance.magnitude
+                            })
+                            const searchResultsDiv = document.getElementById("search-results")
+                            searchResultsDiv.innerHTML = ""
+                            for (const row of filteredData) {
+                                searchResultsDiv.innerHTML += createRow(row)
+                            }
+                        }
+                    ).catch(console.log)
             }
         }
     }
@@ -230,8 +261,7 @@ fetchApiKey().then(initMapsApi).then(() => {
                     .then(readResponse)
                     .then(data => document.body.dispatchEvent(new SearchResultsReadyEvent(data)))
                     .catch(console.log)
-            }
-            else {
+            } else {
                 document.body.dispatchEvent(new SearchResultsReadyEvent(searchData.detail.dataSet))
             }
         }

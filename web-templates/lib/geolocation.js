@@ -91,7 +91,7 @@ export function distanceBetween(coordsA, coordsB) {
             destinations: [destination],
             travelMode: 'DRIVING',
             unitSystem: google.maps.UnitSystem.METRIC,
-            avoidHighways: true,
+            avoidHighways: false,
             avoidTolls: true,
         }, (response, status) => {
             if (status === "OK") {
