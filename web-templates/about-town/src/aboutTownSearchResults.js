@@ -159,17 +159,18 @@ fetchApiKey().then(initMapsApi).then(() => {
         return JSON.stringify(storeCoords)
     }
 
-    function uniqueStoresIn(data) {
+    function uniqueStoresIn(dataWithMatchWeights) {
         const uniqueStores = new Map()
-        for (const entry of data) {
+        for (const entryWithMatchWeight of dataWithMatchWeights) {
+            const entry = entryWithMatchWeight[0]
             uniqueStores.set(uniqueIdFor(entry.store), entry.store)
         }
         return uniqueStores
     }
 
-    function fetchUserDataForTemplates(data) {
+    function fetchUserDataForTemplates(dataWithMatchWeights) {
         const userCoords = currentUserCoords()
-        const uniqueStoresMap = uniqueStoresIn(data)
+        const uniqueStoresMap = uniqueStoresIn(dataWithMatchWeights)
         const storeDistancePromises = []
         const storeDistanceMap = new Map()
 
@@ -192,7 +193,8 @@ fetchApiKey().then(initMapsApi).then(() => {
         }
         return Promise.all(storeDistancePromises)
             .then(() => {
-                for (const entry of data) {
+                for (const entryWithMatchWeight of dataWithMatchWeights) {
+                    const entry = entryWithMatchWeight[0]
                     const storeCoords = {
                         latitude: entry.store.latitude,
                         longitude: entry.store.longitude
@@ -204,7 +206,6 @@ fetchApiKey().then(initMapsApi).then(() => {
             })
     }
 
-
     function showSearchResults(searchResultsReadyEvent) {
         if (searchResultsReadyEvent.detail.dataSet) {
             searchData = searchResultsReadyEvent
@@ -212,32 +213,53 @@ fetchApiKey().then(initMapsApi).then(() => {
             const searchTerms = document.getElementById("searchTermsInput").value
             const keywords = searchTerms.toLowerCase().split(/[\s\-]/)
             if (nonBlank(searchTerms)) {
-                const filteredData = data.filter(record => {
-                    return keywords
-                        .map(keyword => {
-                            if (record.title.toLowerCase().includes(keyword)) {
-                                return true
-                            }
-                            if (record.description.toLowerCase().includes(keyword)) {
-                                return true
-                            }
-                            for (const spec of record.specs) {
-                                if (spec.toLowerCase().includes(keyword)) {
-                                    return true
+                const filteredDataWithMatchWeights = data.map(record => {
+                        const matches = keywords
+                            .map(keyword => {
+
+                                // optimization: we can also look for exact keywords matches against each
+                                // word in the title... maybe weigh at 200 - 500
+
+                                if (record.title.toLowerCase().includes(keyword)) {
+                                    return [100, true]
                                 }
-                            }
-                            return false
-                        })
-                        .reduce((x, y) => x && y)
-                })
-                fetchUserDataForTemplates(filteredData)
-                    .then(() => {
-                            filteredData.sort((x, y) => {
-                                return x.store.distance.magnitude - y.store.distance.magnitude
+                                if (record.description.toLowerCase().includes(keyword)) {
+                                    return [20, true]
+                                }
+                                for (const spec of record.specs) {
+                                    if (spec.toLowerCase().includes(keyword)) {
+                                        return [20, true]
+                                    }
+                                }
+                                return [0, false]
                             })
+                            .reduce((x, y) => [x[0] + y[0], x[1] && y[1]])
+                        return [record, matches]
+                    }
+                ).filter(recordWithMatchWeights => {
+                    return recordWithMatchWeights[1][1]
+                })
+
+                fetchUserDataForTemplates(filteredDataWithMatchWeights)
+                    .then(() => {
+                            const filteredSortedResults = filteredDataWithMatchWeights
+                                .sort((x, y) => {
+                                    // sort by best match, then distance (details requires lots of experimentation and ultimately should be configurable)
+                                    const xRecord = x[0]
+                                    const yRecord = y[0]
+                                    const xScore = x[1][0]
+                                    const yScore = y[1][0]
+                                    let score = yScore - xScore
+                                    if (score === 0) {
+                                        // this could have a weight too, like 10 points per km distance, here for example
+                                        score = xRecord.store.distance.magnitude - yRecord.store.distance.magnitude
+                                    }
+                                    return score
+                                })
+                                .map(filteredRecordWithMatchWeight => filteredRecordWithMatchWeight[0])
                             const searchResultsDiv = document.getElementById("search-results")
                             searchResultsDiv.innerHTML = ""
-                            for (const row of filteredData) {
+                            for (const row of filteredSortedResults) {
                                 searchResultsDiv.innerHTML += createRow(row)
                             }
                         }
