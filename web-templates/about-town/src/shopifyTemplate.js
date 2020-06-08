@@ -5,7 +5,7 @@ export const createRow = r => {
     let s = `
 <div class="row list-item">
   <div class="row">
-    <div class="column">
+    <div class="column img-previews">
       `
     if (r.images) {
         const uuid = UUID.next()

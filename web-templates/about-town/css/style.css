@@ -4,13 +4,26 @@
 }
 
 html, body {
-    height: auto
+    height: auto;
 }
 
 body {
     font-family: FontAwesome, sans-serif;
     font-size: smaller;
     background-color:white;
+}
+
+div::-webkit-scrollbar {
+    width: 4px;
+}
+
+div::-webkit-scrollbar-track {
+    background: white;
+}
+
+div::-webkit-scrollbar-thumb {
+    background-color: darkgray;
+    border-radius: 2px;
 }
 
 div.landing-logo {
@@ -116,6 +129,11 @@ div.fine-print {
     margin-top: 2px;
     padding-left: 8px;
     margin-left: 8px;
+}
+
+div.img-previews {
+    height:310px;
+    overflow-y:auto;
 }
 
 div.img-preview {
