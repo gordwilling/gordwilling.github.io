@@ -1,4 +1,4 @@
-const restrictedKey = "AIzaSyCa4GQPYShvGawnTkh_XX4_n4coT77GBuw"
+const restrictedKey = "AIzaSyCoGS1rjHz-MOwZF-EiQ95hnAnuMwgSfQ8"
 
 /**
  * Loads an unrestricted key from a local file for development work, otherwise

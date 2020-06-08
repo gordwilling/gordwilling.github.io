@@ -219,7 +219,9 @@ fetchApiKey().then(initMapsApi).then(() => {
 
                                 // optimization: we can also look for exact keywords matches against each
                                 // word in the title... maybe weigh at 200 - 500
-
+                                if (record.store.name.toLowerCase().includes(keyword)) {
+                                    return [100, true]
+                                }
                                 if (record.title.toLowerCase().includes(keyword)) {
                                     return [100, true]
                                 }
